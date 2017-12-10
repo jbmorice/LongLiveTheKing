@@ -1,18 +1,32 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
-public class Kingdom : MonoBehaviour
+public class Kingdom : Agent
 {
+    private string _name;
+    private Color _uiColor;
+    private int _gold = 0;
+    private List<Agent> _possessedAgents;
 
-    // Use this for initialization
-    void Start()
+    public Kingdom(string name, Color uiColor)
     {
-
+        _name = name;
+        _uiColor = uiColor;
     }
 
-    // Update is called once per frame
-    void Update()
+    public bool AddPossessedAgent(Agent agent)
     {
+        bool contains = _possessedAgents.Contains(agent);
+        if (!contains)
+        {
+            _possessedAgents.Add(agent);
+            return true;
+        }
+        return false;
+    }
 
+    public bool RemoveNeighbouringRoad(Agent agent)
+    {
+        return _possessedAgents.Remove(agent);
     }
 }

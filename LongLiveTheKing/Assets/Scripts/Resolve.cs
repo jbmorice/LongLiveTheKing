@@ -1,17 +1,12 @@
-﻿using NUnit.Framework.Constraints;
-using UnityEngine;
-
-public class GoTo : AgentBehaviour
+﻿public class Resolve : AgentBehaviour
 {
-    private MovingAgent _agent;
-    private Agent _destinastion;
+    private Battle _battle;
 
-    public bool Start(MovingAgent agent, Agent destination)
+    public bool Start(Battle battle)
     {
         if (base.Start())
         {
-            _agent = agent;
-            _destinastion = destination;
+            _battle = battle;
             return true;
         }
         return false;
@@ -46,6 +41,6 @@ public class GoTo : AgentBehaviour
 
     public override void Update(float dt)
     {
-        
+
     }
 }

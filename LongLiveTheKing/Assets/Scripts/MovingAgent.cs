@@ -1,4 +1,7 @@
-﻿public class MovingAgent : AgentBehaviour
+﻿public class MovingAgent : Agent
 {
-
+    public MovingAgent()
+    {
+        
+    }
 }
