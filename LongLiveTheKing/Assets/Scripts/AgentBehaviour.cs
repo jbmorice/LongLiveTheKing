@@ -1,9 +1,16 @@
-﻿public abstract class AgentBehaviour
-{
-    protected AgentController _controller;
-    protected bool _isRunning;
-    protected bool _isPaused;
+﻿using UnityEngine;
 
+public abstract class AgentBehaviour
+{
+    public enum State
+    {
+        Stopped,
+        Running,
+        Paused
+    }
+
+    protected AgentController _controller;
+    protected State _state;
 
     public AgentController GetController()
     {
@@ -15,11 +22,20 @@
         _controller = controller;
     }
 
+    public State Status
+    {
+        get
+        {
+            return _state;
+        }
+
+    }
+
     public bool Start()
     {
-        if (!_isRunning)
+        if (_state == State.Stopped)
         {
-            _isRunning = true;
+            _state = State.Running;
             return true;
         }
         return false;
@@ -28,9 +44,9 @@
 
     public bool Stop()
     {
-        if (_isRunning)
+        if (_state == State.Running)
         {
-            _isRunning = false;
+            _state = State.Stopped;
             return true;
         }
         return false;
@@ -38,9 +54,9 @@
 
     public bool Pause()
     {
-        if (_isRunning)
+        if (_state == State.Running)
         {
-            _isPaused = true;
+            _state = State.Paused;
             return true;
         }
         return false;
@@ -48,9 +64,9 @@
 
     public bool Resume()
     {
-        if (_isRunning && _isPaused)
+        if (_state == State.Paused)
         {
-            _isPaused = true;
+            _state = State.Running;
             return true;
         }
         return false;

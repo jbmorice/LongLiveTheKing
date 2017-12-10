@@ -1,11 +1,14 @@
-﻿public class Army : MovingAgent
-{
-    private Kingdom _kingdom;
-    private int _units;
+﻿using UnityEngine;
 
-    public Army(Kingdom kingdom, int units)
+public class Army : MovingAgent
+{
+    public Army(GameObject gameObject, Kingdom kingdom, int units) :
+        base(gameObject)
     {
-        _kingdom = kingdom;
-        _units = units;
+        Kingdom = kingdom;
+        Units = units;
     }
+
+    public int Units { get; set; }
+    public Kingdom Kingdom { get; set; }
 }

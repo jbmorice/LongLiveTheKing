@@ -1,12 +1,15 @@
-﻿public class Battle : Agent
-{
-    private Agent _firstAgent;
-    private Agent _secondAgent;
+﻿using UnityEngine;
 
-    public Battle(Agent firstAgent, Agent secondAgent)
+public class Battle : Agent
+{
+    public Army FirstAgent { get; set; }
+    public Army SecondAgent { get; set; }
+
+    public Battle(GameObject gameObject, Army firstAgent, Army secondAgent):
+        base(gameObject)
     {
-        _firstAgent = firstAgent;
-        _secondAgent = secondAgent;
+        FirstAgent = firstAgent;
+        SecondAgent = secondAgent;
     }
 
 }

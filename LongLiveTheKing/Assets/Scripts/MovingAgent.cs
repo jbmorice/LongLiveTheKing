@@ -1,6 +1,9 @@
-﻿public class MovingAgent : Agent
+﻿using UnityEngine;
+
+public class MovingAgent : Agent
 {
-    public MovingAgent()
+    public MovingAgent(GameObject gameObject) :
+        base(gameObject)
     {
         
     }

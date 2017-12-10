@@ -8,7 +8,8 @@ public class Kingdom : Agent
     private int _gold = 0;
     private List<Agent> _possessedAgents;
 
-    public Kingdom(string name, Color uiColor)
+    public Kingdom(GameObject gameObject, string name, Color uiColor) :
+        base(gameObject)
     {
         _name = name;
         _uiColor = uiColor;
@@ -25,7 +26,7 @@ public class Kingdom : Agent
         return false;
     }
 
-    public bool RemoveNeighbouringRoad(Agent agent)
+    public bool RemovePossessedAgent(Agent agent)
     {
         return _possessedAgents.Remove(agent);
     }

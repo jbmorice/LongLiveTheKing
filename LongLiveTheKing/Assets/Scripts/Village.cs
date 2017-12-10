@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class Village : Agent
 {
@@ -6,7 +7,8 @@ public class Village : Agent
     private List<Road> _neighbouringRoads;
     private Kingdom _kingdom;
 
-    public Village() : base()
+    public Village(GameObject gameObject) :
+        base(gameObject)
     {
 
     }

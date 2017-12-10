@@ -1,10 +1,13 @@
-﻿public class Road : Agent
+﻿using UnityEngine;
+
+public class Road : Agent
 {
     private float _travellingSpeed = 1.0f;
     private Village _firstVillage;
     private Village _secondVillage;
 
-    public Road(Village firstVillage, Village secondVillage)
+    public Road(GameObject gameObject, Village firstVillage, Village secondVillage) :
+        base(gameObject)
     {
         _firstVillage = firstVillage;
         _secondVillage = secondVillage;

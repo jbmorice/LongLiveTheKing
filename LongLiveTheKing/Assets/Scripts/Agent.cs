@@ -1,23 +1,15 @@
-﻿public abstract class Agent
+﻿using UnityEngine;
+
+public abstract class Agent
 {
-    private AgentController _controller;
+    public bool IsActive { get; set; }
+    public AgentController Controller { get; set; }
+    public GameObject GameObject { get; set; }
 
-    protected Agent()
+    protected Agent(GameObject gameObject)
     {
-        _controller = new AgentController(this);
-    }
-
-    public AgentController Controller
-    {
-        get
-        {
-            return _controller;
-        }
-
-        set
-        {
-           _controller = value;
-        }
+        Controller = new AgentController(this);
+        GameObject = gameObject;
     }
 
     

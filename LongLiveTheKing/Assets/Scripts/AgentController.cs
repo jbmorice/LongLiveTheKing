@@ -22,7 +22,14 @@ public class AgentController
     {
         foreach (AgentBehaviour behaviour in _behaviours)
         {
-            behaviour.Update(dt);
+            if (behaviour.Status == AgentBehaviour.State.Running)
+            {
+                behaviour.Update(dt);
+            }
+            if (behaviour.Status == AgentBehaviour.State.Stopped)
+            {
+                RemoveAgentBehaviour(behaviour);
+            }
         }
     }
 
