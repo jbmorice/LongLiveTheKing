@@ -3,16 +3,16 @@ using UnityEngine;
 
 public class Kingdom : Agent
 {
-    private string _name;
-    private Color _uiColor;
+    public string Name { get; private set; }
     private int _gold = 0;
+    public Color UiColor { get; private set; }
     private List<Agent> _possessedAgents;
 
-    public Kingdom(GameObject gameObject, string name, Color uiColor) :
-        base(gameObject)
+    public Kingdom(GameObject gameObject, string name, Color uiColor) : base(gameObject)
     {
-        _name = name;
-        _uiColor = uiColor;
+        Name = name;
+        UiColor = uiColor;
+        Debug.Log("I am a kingdom named " + Name + " !");
     }
 
     public bool AddPossessedAgent(Agent agent)
@@ -21,6 +21,11 @@ public class Kingdom : Agent
         if (!contains)
         {
             _possessedAgents.Add(agent);
+            if (agent.GetType() == typeof(Village))
+            {
+                Village village = (Village) agent;
+                village.Kingdom = this;
+            }
             return true;
         }
         return false;

@@ -25,4 +25,14 @@ public class Road : Agent
             _travellingSpeed = value;
         }
     }
+
+    public Kingdom BelongsToKingdom()
+    {
+        if (_firstVillage.Kingdom == _secondVillage.Kingdom)
+        {
+            return _firstVillage.Kingdom;
+        }
+        return null;
+
+    }
 }

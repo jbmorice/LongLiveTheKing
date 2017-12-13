@@ -3,14 +3,15 @@ using UnityEngine;
 
 public class Village : Agent
 {
+    public Kingdom Kingdom { get; set; }
     private int _population = 0;
     private List<Road> _neighbouringRoads;
-    private Kingdom _kingdom;
 
-    public Village(GameObject gameObject) :
+    public Village(GameObject gameObject, Kingdom kingdom) :
         base(gameObject)
     {
-
+        Kingdom = kingdom;
+        Debug.Log("I am a village belonging to " + Kingdom.Name + "!");
     }
 
     public int Population
@@ -42,16 +43,4 @@ public class Village : Agent
         return _neighbouringRoads.Remove(road);
     }
 
-    public Kingdom Kingdom
-    {
-        get
-        {
-            return _kingdom;
-        }
-
-        set
-        {
-            _kingdom = value;
-        }
-    }
 }

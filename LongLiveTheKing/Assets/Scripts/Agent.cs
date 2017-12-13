@@ -12,5 +12,4 @@ public abstract class Agent
         GameObject = gameObject;
     }
 
-    
 }
