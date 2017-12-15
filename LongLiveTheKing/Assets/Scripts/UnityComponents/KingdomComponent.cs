@@ -6,13 +6,12 @@ public class KingdomComponent : MonoBehaviour
     public string Name;
     public Material Material;
 
-    void Awake()
+    public void Init()
     {
         Kingdom = new Kingdom(gameObject, Name, Material.color);
     }
 
     void Start () {
-        //this.gameObject.transform.GetChild(0).GetComponent<MeshRenderer>().material.color = Village.Kingdom.UiColor;
     }
 
     void Update () {

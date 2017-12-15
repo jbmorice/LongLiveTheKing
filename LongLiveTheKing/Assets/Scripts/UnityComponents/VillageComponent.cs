@@ -5,9 +5,15 @@ public class VillageComponent : MonoBehaviour
     public KingdomComponent KingdomComponent;
     public Village Village { get; private set; }
 
-	void Start () {
-	    Village = new Village(gameObject, KingdomComponent.Kingdom);
-	}
+    public void Init()
+    {
+        Village = new Village(gameObject, KingdomComponent.Kingdom);
+    }
+
+    void Start ()
+    {
+        
+    }
 
     void UpdateKingdom()
     {

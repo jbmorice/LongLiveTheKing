@@ -5,19 +5,29 @@ using UnityEngine;
 public class RoadComponent : MonoBehaviour
 {
     public Road Road { get; private set; }
-    public VillageComponent FirstVillage { get; private set; }
-    public VillageComponent SecondVillage { get; private set; }
+    public VillageComponent FirstVillage;
+    public VillageComponent SecondVillage;
 
-    void Start () {
-        Road = new Road(this.gameObject, FirstVillage.Village, SecondVillage.Village);		
-	}
+    public void Init()
+    {
+        Road = new Road(this.gameObject, FirstVillage.Village, SecondVillage.Village);
+    }
 
-    void UpdateKingdom()
+    void Start ()
     {
         
     }
-	
-	void Update () {
-		
+
+    void UpdateKingdom()
+    {
+        Kingdom kingdom = Road.BelongsToKingdom();
+        if (kingdom != null)
+        {
+            this.gameObject.transform.GetChild(0).GetComponent<MeshRenderer>().material.color = kingdom.UiColor;
+        }
+    }
+
+    void Update () {
+		UpdateKingdom();
 	}
 }

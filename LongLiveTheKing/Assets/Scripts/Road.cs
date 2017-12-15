@@ -11,6 +11,7 @@ public class Road : Agent
     {
         _firstVillage = firstVillage;
         _secondVillage = secondVillage;
+        Debug.Log("I am a road between " + _firstVillage + " and " + _secondVillage + " !");
     }
 
     public float TravellingSpeed
