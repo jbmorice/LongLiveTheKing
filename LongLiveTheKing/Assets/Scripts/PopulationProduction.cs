@@ -1,11 +1,8 @@
-﻿using NUnit.Framework.Constraints;
-using UnityEngine;
-
-public class PopulationProduction : AgentBehaviour
+﻿public class PopulationProduction : AgentBehaviour
 {
     private Village _village;
-    private float _period = 0.5f;
-    private float _pastTime = 0.0f;
+    private float _period = 3.0f;
+    private float _elapsedTime = 0.0f;
     private int _increment = 1;
     
 
@@ -20,10 +17,12 @@ public class PopulationProduction : AgentBehaviour
     }
 
     public override void Update(float dt)
-    {   
-        for (_pastTime += dt; _pastTime < _period; _pastTime -= _period)
+    {
+        _elapsedTime += dt;
+        if (_elapsedTime > _period)
         {
             _village.Population += _increment;
+            _elapsedTime -= _period;
         }
     }
 }

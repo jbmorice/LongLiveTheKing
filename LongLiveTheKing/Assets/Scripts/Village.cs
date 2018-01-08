@@ -12,6 +12,11 @@ public class Village : Agent
     {
         Kingdom = kingdom;
         Debug.Log("I am a village belonging to " + Kingdom.Name + "!");
+
+        // Add default behaviours
+        PopulationProduction populationProduction = new PopulationProduction();
+        populationProduction.Start(this); // #FIXME : Override AgentBehaviour.Start() instead of overload
+        Controller.AddAgentBehaviour(populationProduction);
     }
 
     public int Population

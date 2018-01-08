@@ -3,6 +3,7 @@
 public class VillageComponent : MonoBehaviour
 {
     public KingdomComponent KingdomComponent;
+    public int Population;
     public Village Village { get; private set; }
 
     public void Init()
@@ -22,5 +23,6 @@ public class VillageComponent : MonoBehaviour
 
 	void Update () {
 		UpdateKingdom();
+	    Population = Village.Population;
 	}
 }

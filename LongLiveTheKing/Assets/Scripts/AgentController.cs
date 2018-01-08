@@ -8,6 +8,7 @@ public class AgentController
     public AgentController(Agent agent)
     {
         _agent = agent;
+        _behaviours = new List<AgentBehaviour>();
     }
 
     public Agent Agent
