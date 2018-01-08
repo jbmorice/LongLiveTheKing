@@ -544,7 +544,8 @@ Prefab:
       propertyPath: KingdomComponent
       value: 
       objectReference: {fileID: 758700047}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 65995920379965090, guid: 4a553e0c31c888e4fa4f63b807b49903, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 4a553e0c31c888e4fa4f63b807b49903, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &992702334
@@ -703,7 +704,8 @@ Prefab:
       propertyPath: KingdomComponent
       value: 
       objectReference: {fileID: 1730488270}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 65995920379965090, guid: 4a553e0c31c888e4fa4f63b807b49903, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 4a553e0c31c888e4fa4f63b807b49903, type: 2}
   m_IsPrefabParent: 0
 --- !u!4 &1120511805 stripped
@@ -1042,7 +1044,8 @@ Prefab:
       propertyPath: KingdomComponent
       value: 
       objectReference: {fileID: 129816302}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 65995920379965090, guid: 4a553e0c31c888e4fa4f63b807b49903, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 4a553e0c31c888e4fa4f63b807b49903, type: 2}
   m_IsPrefabParent: 0
 --- !u!114 &2079392764 stripped
