@@ -215,6 +215,7 @@ GameObject:
   - component: {fileID: 443725549}
   - component: {fileID: 443725548}
   - component: {fileID: 443725547}
+  - component: {fileID: 443725551}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -284,6 +285,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+--- !u!114 &443725551
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 443725546}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1457f2bda96496c42817a51383fee7c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ClickHold: 0
 --- !u!4 &454161090 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4473747706489118, guid: 4a553e0c31c888e4fa4f63b807b49903,
@@ -698,6 +711,40 @@ Transform:
   m_PrefabParentObject: {fileID: 4473747706489118, guid: 4a553e0c31c888e4fa4f63b807b49903,
     type: 2}
   m_PrefabInternal: {fileID: 1120511804}
+--- !u!1 &1492606994 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1163663092946030, guid: 4a553e0c31c888e4fa4f63b807b49903,
+    type: 2}
+  m_PrefabInternal: {fileID: 2020354668}
+--- !u!65 &1492606995
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1492606994}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &1570580838 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1163663092946030, guid: 4a553e0c31c888e4fa4f63b807b49903,
+    type: 2}
+  m_PrefabInternal: {fileID: 989502541}
+--- !u!65 &1570580839
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1570580838}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1573811342
 GameObject:
   m_ObjectHideFlags: 0
@@ -822,6 +869,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74ae97ca34fcaa649939dbd92bd2b921, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  KingdomComponents: []
+  VillageComponents: []
+  RoadComponents: []
 --- !u!4 &1756047376
 Transform:
   m_ObjectHideFlags: 0
@@ -927,6 +977,23 @@ Transform:
   m_PrefabParentObject: {fileID: 4191230276638776, guid: ecddfb8c8247a034ca9316948018f9ff,
     type: 2}
   m_PrefabInternal: {fileID: 1875908998}
+--- !u!1 &1888909464 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1163663092946030, guid: 4a553e0c31c888e4fa4f63b807b49903,
+    type: 2}
+  m_PrefabInternal: {fileID: 1120511804}
+--- !u!65 &1888909465
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1888909464}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &2020354668
 Prefab:
   m_ObjectHideFlags: 0
