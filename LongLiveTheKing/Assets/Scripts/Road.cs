@@ -3,15 +3,15 @@
 public class Road : Agent
 {
     private float _travellingSpeed = 1.0f;
-    private Village _firstVillage;
-    private Village _secondVillage;
+    public Village FirstVillage;
+    public Village SecondVillage;
 
     public Road(GameObject gameObject, Village firstVillage, Village secondVillage) :
         base(gameObject)
     {
-        _firstVillage = firstVillage;
-        _secondVillage = secondVillage;
-        Debug.Log("I am a road between " + _firstVillage + " and " + _secondVillage + " !");
+        FirstVillage = firstVillage;
+        SecondVillage = secondVillage;
+        Debug.Log("I am a road between " + FirstVillage + " and " + SecondVillage + " !");
     }
 
     public float TravellingSpeed
@@ -29,9 +29,9 @@ public class Road : Agent
 
     public Kingdom BelongsToKingdom()
     {
-        if (_firstVillage.Kingdom == _secondVillage.Kingdom)
+        if (FirstVillage.Kingdom == SecondVillage.Kingdom)
         {
-            return _firstVillage.Kingdom;
+            return FirstVillage.Kingdom;
         }
         return null;
 

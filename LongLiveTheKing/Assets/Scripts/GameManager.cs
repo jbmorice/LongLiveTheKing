@@ -96,7 +96,6 @@ public class GameManager : MonoBehaviour
             {
                 _sourceVillage = hit.transform.gameObject.GetComponent<VillageComponent>();
                 if (_sourceVillage == null || !_sourceVillage.KingdomComponent.Kingdom.Equals(Player.Kingdom)) return;
-                Debug.Log("Source village : " + _sourceVillage.name);
                 _clickHold = true;
             }
         }
@@ -110,10 +109,7 @@ public class GameManager : MonoBehaviour
             {
                 _destinationVillage = hit.transform.gameObject.GetComponent<VillageComponent>();
                 if (_destinationVillage == null) return;
-                Debug.Log("Destination village : " + _destinationVillage.name);
             }
-
-            if (_sourceVillage == _destinationVillage) return;
 
             ArmyComponent armyComponent = _sourceVillage.SendArmy(_destinationVillage);
             if (armyComponent != null)

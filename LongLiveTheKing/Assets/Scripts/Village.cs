@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Village : Agent
@@ -11,6 +12,7 @@ public class Village : Agent
         base(gameObject)
     {
         Kingdom = kingdom;
+        _neighbouringRoads = new List<Road>();
         Debug.Log("I am a village belonging to " + Kingdom.Name + "!");
 
         // Add default behaviours
@@ -30,6 +32,19 @@ public class Village : Agent
         {
             _population = value;
         }
+    }
+
+    internal bool IsNeighbour(Village destinationVillage)
+    {
+        foreach (Road road in _neighbouringRoads)
+        {
+            if ((road.FirstVillage == this && road.SecondVillage == destinationVillage) ||
+                (road.FirstVillage == destinationVillage && road.SecondVillage == this))
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
     public bool AddNeighbouringRoad(Road road)

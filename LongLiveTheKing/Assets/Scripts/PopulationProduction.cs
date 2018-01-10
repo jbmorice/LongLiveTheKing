@@ -1,9 +1,9 @@
 ﻿public class PopulationProduction : AgentBehaviour
 {
     private Village _village;
-    private float _period = 3.0f;
+    private float _period = 1.0f;
     private float _elapsedTime = 0.0f;
-    private int _increment = 1;
+    private int _increment = 5;
     
 
     public bool Start(Village village)

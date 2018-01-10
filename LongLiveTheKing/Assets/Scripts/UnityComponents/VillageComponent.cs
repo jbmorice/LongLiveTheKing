@@ -22,7 +22,9 @@ public class VillageComponent : MonoBehaviour
 
     public ArmyComponent SendArmy(VillageComponent destinationVillage)
     {
+        if (this == destinationVillage) return null;
         if (Village.Population < 2) return null;
+        if (!Village.IsNeighbour(destinationVillage.Village)) return null;
 
         GameObject army = Instantiate(KingdomComponent.ArmyPrefab, transform);
         ArmyComponent armyComponent = army.GetComponent<ArmyComponent>();
