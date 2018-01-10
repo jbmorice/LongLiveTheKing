@@ -9,6 +9,11 @@ public class GoTo : AgentBehaviour
     private List<Agent> _path;
     private int _position = 0;
 
+    public GoTo()
+    {
+        _path = new List<Agent>();
+    }
+
     public bool Start(MovingAgent agent, Village origin, Agent destination)
     {
         if (base.Start())

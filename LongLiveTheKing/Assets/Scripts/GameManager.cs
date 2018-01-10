@@ -8,6 +8,9 @@ public class GameManager : MonoBehaviour
     public List<KingdomComponent> KingdomComponents;
     public List<VillageComponent> VillageComponents;
     public List<RoadComponent> RoadComponents;
+    public List<ArmyComponent> ArmyComponents;
+
+    public KingdomComponent Player;
 
     private void InitComponents()
     {
@@ -37,6 +40,13 @@ public class GameManager : MonoBehaviour
             road.Init();
             RoadComponents.Add(road);
         }
+
+        ArmyComponents = new List<ArmyComponent>();
+    }
+
+    public void AddArmyComponent(ArmyComponent armyComponent)
+    {
+        ArmyComponents.Add(armyComponent);
     }
 
     void Start()
@@ -63,6 +73,11 @@ public class GameManager : MonoBehaviour
         foreach (RoadComponent roadComponent in RoadComponents)
         {
             roadComponent.Road.Controller.Update(Time.deltaTime);
+        }
+
+        foreach (ArmyComponent armyComponent in ArmyComponents)
+        {
+            armyComponent.Army.Controller.Update(Time.deltaTime);
         }
 
     }
