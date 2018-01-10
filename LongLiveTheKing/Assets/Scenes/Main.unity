@@ -296,11 +296,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1457f2bda96496c42817a51383fee7c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GameManagerGameObject: {fileID: 1756047374}
-  ClickHold: 0
-  sourceVillage: {fileID: 0}
-  destinationVillage: {fileID: 0}
-  ArmyPrefab: {fileID: 1143568416116426, guid: 8d38c35bf1c8a0047b4a7e010f4c6115, type: 2}
 --- !u!4 &454161090 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4473747706489118, guid: 4a553e0c31c888e4fa4f63b807b49903,
@@ -834,6 +829,12 @@ Prefab:
       propertyPath: Material
       value: 
       objectReference: {fileID: 2100000, guid: 0acccd2a346381b46824da907097af63, type: 2}
+    - target: {fileID: 114944592578082526, guid: ecddfb8c8247a034ca9316948018f9ff,
+        type: 2}
+      propertyPath: ArmyPrefab
+      value: 
+      objectReference: {fileID: 1143568416116426, guid: 8d38c35bf1c8a0047b4a7e010f4c6115,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ecddfb8c8247a034ca9316948018f9ff, type: 2}
   m_IsPrefabParent: 0
@@ -878,6 +879,7 @@ MonoBehaviour:
   KingdomComponents: []
   VillageComponents: []
   RoadComponents: []
+  ArmyComponents: []
   Player: {fileID: 1730488270}
 --- !u!4 &1756047376
 Transform:
@@ -976,6 +978,12 @@ Prefab:
       propertyPath: Material
       value: 
       objectReference: {fileID: 2100000, guid: 9289c3fc9686e714bb49d97e822f4a16, type: 2}
+    - target: {fileID: 114944592578082526, guid: ecddfb8c8247a034ca9316948018f9ff,
+        type: 2}
+      propertyPath: ArmyPrefab
+      value: 
+      objectReference: {fileID: 1143568416116426, guid: 8d38c35bf1c8a0047b4a7e010f4c6115,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ecddfb8c8247a034ca9316948018f9ff, type: 2}
   m_IsPrefabParent: 0

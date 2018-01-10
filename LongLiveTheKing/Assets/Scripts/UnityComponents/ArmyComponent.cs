@@ -6,9 +6,24 @@ public class ArmyComponent : MonoBehaviour {
 
     public Army Army {get; private set;}
 
-    public void Init(KingdomComponent kingdomComponent, int units, VillageComponent origin, VillageComponent destination)
+    public int units;
+    public int Units
     {
-        Army = new Army(gameObject, kingdomComponent.Kingdom, units, origin.Village, destination.Village);
+        get
+        {
+            return Army.Units;
+        }
+        set
+        {
+            units = value;
+            Army.Units = value;
+        }
+    }
+
+    public void Init(KingdomComponent kingdomComponent, int a_units, VillageComponent origin, VillageComponent destination)
+    {
+        Army = new Army(gameObject, kingdomComponent.Kingdom, a_units, origin.Village, destination.Village);
+        Units = a_units;
     }
 
     // Use this for initialization
