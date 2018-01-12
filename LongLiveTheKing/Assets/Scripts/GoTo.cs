@@ -4,10 +4,12 @@ using UnityEngine;
 public class GoTo : AgentBehaviour
 {
     private MovingAgent _agent;
-    private Village _origin;
-    private Agent _destinastion;
     private List<Agent> _path;
     private int _position = 0;
+
+    public Village Origin { get; private set; }
+    public Agent Destination { get; private set; }
+
 
     public GoTo()
     {
@@ -19,7 +21,7 @@ public class GoTo : AgentBehaviour
         if (base.Start())
         {
             _agent = agent;
-            _destinastion = destination;
+            Destination = destination;
             _path.Add(destination);
             return true;
         }

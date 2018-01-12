@@ -5,14 +5,18 @@ using UnityEngine;
 
 public class RoadComponent : MonoBehaviour
 {
+    public GameManager GameManager { get; private set; }
     public Road Road { get; private set; }
     public VillageComponent FirstVillage;
     public VillageComponent SecondVillage;
 
-    public void Init()
+    public void Init(GameManager gameManager)
     {
+        GameManager = gameManager;
+
         Road = new Road(this.gameObject, FirstVillage.Village, SecondVillage.Village);
         GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
+        cube.transform.parent = transform;
 
         Vector3 position = (FirstVillage.transform.position + SecondVillage.transform.position) / 2;
         cube.transform.position = new Vector3(position[0], 0.05f, position[2]);

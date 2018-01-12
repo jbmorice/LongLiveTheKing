@@ -50,4 +50,26 @@ public class AgentController
     {
             return _behaviours.Remove(behaviour);
     }
+
+    public T GetAgentBehaviour<T>() where T : AgentBehaviour
+    {
+        foreach (AgentBehaviour agentBehaviour in _behaviours)
+        {
+            if (agentBehaviour.GetType() == typeof(T)) return (T) agentBehaviour;
+        }
+
+        return default(T);
+    }
+
+    public List<T> GetAgentBehaviours<T>() where T : AgentBehaviour
+    {
+        List<T> result = new List<T>();
+
+        foreach (AgentBehaviour agentBehaviour in _behaviours)
+        {
+            if (agentBehaviour.GetType() == typeof(T)) result.Add((T) agentBehaviour);
+        }
+
+        return result;
+    }
 }

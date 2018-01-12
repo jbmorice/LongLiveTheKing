@@ -38,6 +38,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4473747706489118}
   - component: {fileID: 114606128572010302}
+  - component: {fileID: 65297439547131642}
   m_Layer: 0
   m_Name: Village
   m_TagString: Untagged
@@ -113,6 +114,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1143723483912394}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!65 &65297439547131642
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1163663092946030}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.5, y: 1.5, z: 1.5}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!65 &65995920379965090
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -137,3 +150,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   KingdomComponent: {fileID: 0}
+  population: 0

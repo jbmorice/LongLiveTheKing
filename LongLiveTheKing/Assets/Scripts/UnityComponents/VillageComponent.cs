@@ -3,6 +3,8 @@
 public class VillageComponent : MonoBehaviour
 {
     public KingdomComponent KingdomComponent;
+    public GameManager GameManager { get; private set; }
+
     public int population;
     public int Population
     {
@@ -15,8 +17,9 @@ public class VillageComponent : MonoBehaviour
     }
     public Village Village { get; private set; }
 
-    public void Init()
+    public void Init(GameManager gameManager)
     {
+        GameManager = gameManager;
         Village = new Village(gameObject, KingdomComponent.Kingdom);
     }
 
@@ -32,7 +35,7 @@ public class VillageComponent : MonoBehaviour
         int oldPopulation = Population;
         int newPopulation = oldPopulation / 2;
 
-        armyComponent.Init(KingdomComponent, newPopulation, this, destinationVillage);
+        armyComponent.Init(GameManager, KingdomComponent, newPopulation, this, destinationVillage);
         Village.Population = oldPopulation - newPopulation;
 
         return armyComponent;

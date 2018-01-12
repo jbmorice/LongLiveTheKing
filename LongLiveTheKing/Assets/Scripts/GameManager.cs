@@ -23,7 +23,7 @@ public class GameManager : MonoBehaviour
         foreach (Object obj in kingdoms)
         {
             KingdomComponent kingdom = (KingdomComponent)obj;
-            kingdom.Init();
+            kingdom.Init(this);
             KingdomComponents.Add(kingdom);
         }
 
@@ -32,7 +32,7 @@ public class GameManager : MonoBehaviour
         foreach (Object obj in villages)
         {
             VillageComponent village = (VillageComponent)obj;
-            village.Init();
+            village.Init(this);
             VillageComponents.Add(village);
         }
 
@@ -41,7 +41,7 @@ public class GameManager : MonoBehaviour
         foreach (Object obj in roads)
         {
             RoadComponent road = (RoadComponent)obj;
-            road.Init();
+            road.Init(this);
             RoadComponents.Add(road);
         }
 
