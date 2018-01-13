@@ -13,6 +13,8 @@ public class GameManager : MonoBehaviour
     public List<VillageComponent> VillageComponents;
     public List<RoadComponent> RoadComponents;
     public List<ArmyComponent> ArmyComponents;
+    public List<BattleComponent> BattleComponents;
+    public List<SiegeComponent> SiegesComponents;
 
     public KingdomComponent Player;
 

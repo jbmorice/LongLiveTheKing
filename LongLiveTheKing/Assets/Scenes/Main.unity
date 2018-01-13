@@ -840,6 +840,8 @@ MonoBehaviour:
   VillageComponents: []
   RoadComponents: []
   ArmyComponents: []
+  BattleComponents: []
+  SiegesComponents: []
   Player: {fileID: 1730488270}
 --- !u!4 &1756047376
 Transform:

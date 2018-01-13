@@ -8,6 +8,9 @@ public class ArmyComponent : MonoBehaviour {
     public Army Army {get; private set;}
     public GameManager GameManager { get; private set; }
 
+    public GameObject SiegePrefab;
+    public GameObject BattlePrefab;
+
     public int units;
     public int Units
     {
@@ -29,25 +32,29 @@ public class ArmyComponent : MonoBehaviour {
         Units = a_units;
     }
 
-    public bool Equals(ArmyComponent other)
-    {
-        return this.Army == other.Army;
-    }
-
     void OnTriggerEnter(Collider other)
     {
         VillageComponent villageComponent = other.transform.GetComponent<VillageComponent>();
         if (villageComponent && villageComponent.Village == Army.Controller.GetAgentBehaviour<GoTo>().Destination)
         {
-            Debug.Log("J'ai rencontré un village !");
-
             VillageComponent collidedVillage = other.gameObject.GetComponent<VillageComponent>();
 
             if (collidedVillage.Village.Kingdom == Army.Kingdom)
             {
+                Debug.Log("J'ai rencontré un village allié !");
+
                 collidedVillage.Village.Population += Army.Units;
                 GameManager.ArmyComponents.Remove(this);
                 Destroy(gameObject);
+            }
+            else
+            {
+                Debug.Log("J'ai rencontré un village ennemi !");
+                Army.Controller.GetAgentBehaviour<GoTo>().Stop();
+                GameObject siege = Instantiate(SiegePrefab, transform);
+                siege.transform.position = (transform.position + collidedVillage.transform.position) / 2;
+                SiegeComponent siegeComponent = siege.GetComponent<SiegeComponent>();
+                siegeComponent.Init(GameManager, this, collidedVillage);
             }
         }
     }
