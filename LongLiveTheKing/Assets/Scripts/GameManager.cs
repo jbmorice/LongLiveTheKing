@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
     public List<ArmyComponent> ArmyComponents;
     public List<BattleComponent> BattleComponents;
     public List<SiegeComponent> SiegesComponents;
+    public IAComponent IA;
 
     public KingdomComponent Player;
 
@@ -48,6 +49,10 @@ public class GameManager : MonoBehaviour
         }
 
         ArmyComponents = new List<ArmyComponent>();
+        SiegesComponents = new List<SiegeComponent>();
+        BattleComponents = new List<BattleComponent>();
+
+        IA.Init(this);
     }
 
     public void AddArmyComponent(ArmyComponent armyComponent)
@@ -60,6 +65,7 @@ public class GameManager : MonoBehaviour
         KingdomComponents = new List<KingdomComponent>();
         VillageComponents = new List<VillageComponent>();
         RoadComponents = new List<RoadComponent>();
+
 
         InitComponents();
     }

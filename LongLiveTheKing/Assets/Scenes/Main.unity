@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -366,6 +366,46 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!1 &662086303
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 662086305}
+  - component: {fileID: 662086304}
+  m_Layer: 0
+  m_Name: IA
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &662086304
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 662086303}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1aef3f5086034a94496f0df1b91a1482, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &662086305
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 662086303}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 2.604269, y: 1.0159073, z: -3.3149776}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &758700047 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114944592578082526, guid: ecddfb8c8247a034ca9316948018f9ff,
@@ -570,7 +610,7 @@ Transform:
   - {fileID: 1875908999}
   - {fileID: 1613734649}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1054337928 stripped
 MonoBehaviour:
@@ -625,7 +665,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4191230276638776, guid: ecddfb8c8247a034ca9316948018f9ff, type: 2}
       propertyPath: m_RootOrder
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1655725311750552, guid: ecddfb8c8247a034ca9316948018f9ff, type: 2}
       propertyPath: m_Name
@@ -734,7 +774,7 @@ Transform:
   - {fileID: 1070415000}
   - {fileID: 845030975}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1613734648
 Prefab:
@@ -773,7 +813,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4191230276638776, guid: ecddfb8c8247a034ca9316948018f9ff, type: 2}
       propertyPath: m_RootOrder
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 114944592578082526, guid: ecddfb8c8247a034ca9316948018f9ff,
         type: 2}
@@ -795,6 +835,11 @@ Prefab:
       value: 
       objectReference: {fileID: 1143568416116426, guid: 8d38c35bf1c8a0047b4a7e010f4c6115,
         type: 2}
+    - target: {fileID: 114944592578082526, guid: ecddfb8c8247a034ca9316948018f9ff,
+        type: 2}
+      propertyPath: IA
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ecddfb8c8247a034ca9316948018f9ff, type: 2}
   m_IsPrefabParent: 0
@@ -842,6 +887,7 @@ MonoBehaviour:
   ArmyComponents: []
   BattleComponents: []
   SiegesComponents: []
+  IA: {fileID: 662086304}
   Player: {fileID: 1730488270}
 --- !u!4 &1756047376
 Transform:
@@ -885,7 +931,7 @@ Transform:
   - {fileID: 454161090}
   - {fileID: 1054337929}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1875908998
 Prefab:
@@ -924,7 +970,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4191230276638776, guid: ecddfb8c8247a034ca9316948018f9ff, type: 2}
       propertyPath: m_RootOrder
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1655725311750552, guid: ecddfb8c8247a034ca9316948018f9ff, type: 2}
       propertyPath: m_Name
@@ -946,6 +992,11 @@ Prefab:
       value: 
       objectReference: {fileID: 1143568416116426, guid: 8d38c35bf1c8a0047b4a7e010f4c6115,
         type: 2}
+    - target: {fileID: 114944592578082526, guid: ecddfb8c8247a034ca9316948018f9ff,
+        type: 2}
+      propertyPath: Playable
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ecddfb8c8247a034ca9316948018f9ff, type: 2}
   m_IsPrefabParent: 0

@@ -55,6 +55,7 @@ public class ArmyComponent : MonoBehaviour {
                 siege.transform.position = (transform.position + collidedVillage.transform.position) / 2;
                 SiegeComponent siegeComponent = siege.GetComponent<SiegeComponent>();
                 siegeComponent.Init(GameManager, this, collidedVillage);
+                GameManager.SiegesComponents.Add(siegeComponent);
             }
         }
     }

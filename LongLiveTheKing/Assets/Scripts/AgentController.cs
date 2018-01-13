@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 public class AgentController
 {
@@ -21,7 +22,7 @@ public class AgentController
 
     public void Update(float dt)
     {
-        foreach (AgentBehaviour behaviour in _behaviours)
+        foreach (AgentBehaviour behaviour in _behaviours.ToList())
         {
             if (behaviour.Status == AgentBehaviour.State.Running)
             {
