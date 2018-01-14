@@ -41,7 +41,7 @@ public class VillageComponent : MonoBehaviour
         return armyComponent;
     }
 
-    public bool isUnderSiege()
+    public bool IsUnderSiege()
     {
         foreach (SiegeComponent siege in GameManager.SiegesComponents)
         {

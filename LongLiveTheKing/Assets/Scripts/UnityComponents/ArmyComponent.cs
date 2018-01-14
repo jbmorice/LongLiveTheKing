@@ -22,6 +22,7 @@ public class ArmyComponent : MonoBehaviour {
         {
             units = value;
             Army.Units = value;
+            Debug.Log(value);
         }
     }
 
@@ -58,6 +59,60 @@ public class ArmyComponent : MonoBehaviour {
                 GameManager.SiegesComponents.Add(siegeComponent);
             }
         }
+
+        ArmyComponent collidedArmy = other.transform.GetComponent<ArmyComponent>();
+        if (collidedArmy)
+        {
+            if (collidedArmy.Army.Kingdom == Army.Kingdom)
+            {
+                Debug.Log("J'ai rencontré une armée allié !");
+                bool iBesiege = Besiege();
+                bool armyBesiege = collidedArmy.Besiege();
+                if (iBesiege || armyBesiege)
+                {
+                    if (armyBesiege)
+                    {
+                        collidedArmy.Army.Units += Army.Units;
+                        GameManager.ArmyComponents.Remove(this);
+                        Destroy(gameObject);
+                    }
+                    else
+                    {
+                        Army.Units += collidedArmy.Army.Units;
+                        GameManager.ArmyComponents.Remove(collidedArmy);
+                        Destroy(collidedArmy.gameObject);
+                    }
+                }
+            }
+            else if(!InBattleAgainst(collidedArmy))
+            {
+                Debug.Log("J'ai rencontré une armée ennemi !");
+                GameObject battle = Instantiate(BattlePrefab, transform);
+                battle.transform.position = (transform.position + collidedArmy.transform.position) / 2;
+                BattleComponent battleComponent = battle.GetComponent<BattleComponent>();
+                battleComponent.Init(GameManager, this, collidedArmy);
+                GameManager.BattleComponents.Add(battleComponent);
+            }
+        }
+    }
+
+    public bool Besiege()
+    {
+        foreach (SiegeComponent siege in GameManager.SiegesComponents)
+        {
+            if (Army == siege.ArmyComponent.Army) return true;
+        }
+        return false;
+    }
+
+    public bool InBattleAgainst(ArmyComponent army)
+    {
+        foreach (BattleComponent battleComponent in GameManager.BattleComponents)
+        {
+            if (battleComponent.FirstArmyComponent == this && battleComponent.SecondArmyComponent == army) return true;
+            if (battleComponent.FirstArmyComponent == army && battleComponent.SecondArmyComponent == this) return true;
+        }
+        return false;
     }
 
     // Use this for initialization

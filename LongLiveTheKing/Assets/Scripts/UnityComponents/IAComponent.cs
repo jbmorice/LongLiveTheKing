@@ -79,7 +79,7 @@ public class IAComponent : MonoBehaviour
                             }
                             else
                             {
-                                if (currentRoad.SecondVillage.Population > bestVillage.Population && !currentRoad.SecondVillage.isUnderSiege())
+                                if (currentRoad.SecondVillage.Population > bestVillage.Population && !currentRoad.SecondVillage.IsUnderSiege())
                                     bestVillage = currentRoad.SecondVillage;
                             }
                         }
@@ -92,7 +92,7 @@ public class IAComponent : MonoBehaviour
                             }
                             else
                             {
-                                if (currentRoad.FirstVillage.Population > bestVillage.Population && !currentRoad.FirstVillage.isUnderSiege())
+                                if (currentRoad.FirstVillage.Population > bestVillage.Population && !currentRoad.FirstVillage.IsUnderSiege())
                                     bestVillage = currentRoad.FirstVillage;
                             }
                         }

@@ -3,9 +3,9 @@
 public class ResolveSiege : AgentBehaviour
 {
     private Siege _siege;
-    private float _period = 0.1f;
+    private float _period = 0.2f;
     private float _pastTime = 0.0f;
-    private int _decrement = 2;
+    private int _decrement = 1;
 
     public bool Start(Siege siege)
     {
@@ -24,33 +24,33 @@ public class ResolveSiege : AgentBehaviour
 
     public override void Update(float dt)
     {
-        Debug.Log("I update the siege !");
-
-
-        _pastTime += dt;
-        if (_pastTime > _period)
-        { 
-            _siege.Army.Units -= _decrement;
-            _siege.Village.Population -= _decrement;
-            _pastTime -= _period;
-        }
-
-        if (_siege.Army.Units > 0 && _siege.Village.Population <= 0)
+        if (_siege.InProgress)
         {
-            this.Stop();
+            _pastTime += dt;
+            if (_pastTime > _period)
+            {
+                _siege.Army.Units -= _decrement;
+                _siege.Village.Population -= _decrement;
+                _pastTime -= _period;
+            }
 
-            _siege.Village.Population = _siege.Army.Units;
-            _siege.Village.Kingdom = _siege.Army.Kingdom;
+            if (_siege.Army.Units > 0 && _siege.Village.Population <= 0)
+            {
+                _siege.Village.Population = _siege.Army.Units;
+                _siege.Village.Kingdom = _siege.Army.Kingdom;
 
-            _siege.Army.Kingdom.AddPossessedAgent(_siege.Village);
-            _siege.Village.Kingdom.RemovePossessedAgent(_siege.Village);
+                _siege.Village.Kingdom.RemovePossessedAgent(_siege.Village);
+                _siege.Army.Kingdom.AddPossessedAgent(_siege.Village);
 
-            _siege.InProgress = false;
-        }
-        else if (_siege.Army.Units <= 0 )
-        {
-            this.Stop();
-            _siege.InProgress = false;
+                _siege.InProgress = false;
+                this.Stop();
+            }
+            else if (_siege.Army.Units <= 0)
+            {
+                _siege.InProgress = false;
+                this.Stop();
+            }
+
         }
 
     }

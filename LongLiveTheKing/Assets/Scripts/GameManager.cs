@@ -99,7 +99,7 @@ public class GameManager : MonoBehaviour
 
         foreach (BattleComponent battleComponent in BattleComponents)
         {
-            //battleComponent.Battle.Controller.Update(Time.deltaTime);
+            battleComponent.Battle.Controller.Update(Time.deltaTime);
         }
 
     }
