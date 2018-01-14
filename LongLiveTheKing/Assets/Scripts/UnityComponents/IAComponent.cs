@@ -6,7 +6,7 @@ public class IAComponent : MonoBehaviour
 {
     private float _elapsedTimeAttack = 0.0f;
     private float _periodAttack = 15.0f;
-    private float _elapsedTimeDefence = 10.0f;
+    private float _elapsedTimeDefence = 5.0f;
     private float _periodDefence = 10.0f;
 
 
@@ -56,7 +56,6 @@ public class IAComponent : MonoBehaviour
 
         if (villagesUnderSiege.Count == 0)
         {
-            _elapsedTimeDefence = _periodDefence;
             return false;
         }
         else

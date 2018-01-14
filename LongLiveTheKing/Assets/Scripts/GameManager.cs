@@ -92,6 +92,16 @@ public class GameManager : MonoBehaviour
             armyComponent.Army.Controller.Update(Time.deltaTime);
         }
 
+        foreach (SiegeComponent siegeComponent in SiegesComponents)
+        {
+            siegeComponent.Siege.Controller.Update(Time.deltaTime);
+        }
+
+        foreach (BattleComponent battleComponent in BattleComponents)
+        {
+            //battleComponent.Battle.Controller.Update(Time.deltaTime);
+        }
+
     }
 
     void MoveArmy()

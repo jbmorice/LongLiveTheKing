@@ -22,6 +22,12 @@ public class SiegeComponent : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+	    if (!Siege.InProgress)
+	    {
+            GameManager.ArmyComponents.Remove(ArmyComponent);
+	        GameManager.SiegesComponents.Remove(this);
+	        Destroy(ArmyComponent.gameObject);
+            Destroy(gameObject);
+        }
 	}
 }

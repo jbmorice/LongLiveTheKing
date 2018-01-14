@@ -50,7 +50,7 @@ public class ArmyComponent : MonoBehaviour {
             else
             {
                 Debug.Log("J'ai rencontré un village ennemi !");
-                Army.Controller.GetAgentBehaviour<GoTo>().Stop();
+                //Army.Controller.GetAgentBehaviour<GoTo>().Stop();
                 GameObject siege = Instantiate(SiegePrefab, transform);
                 siege.transform.position = (transform.position + collidedVillage.transform.position) / 2;
                 SiegeComponent siegeComponent = siege.GetComponent<SiegeComponent>();
