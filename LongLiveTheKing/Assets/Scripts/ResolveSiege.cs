@@ -37,10 +37,11 @@ public class ResolveSiege : AgentBehaviour
             if (_siege.Army.Units > 0 && _siege.Village.Population <= 0)
             {
                 _siege.Village.Population = _siege.Army.Units;
-                _siege.Village.Kingdom = _siege.Army.Kingdom;
 
                 _siege.Village.Kingdom.RemovePossessedAgent(_siege.Village);
                 _siege.Army.Kingdom.AddPossessedAgent(_siege.Village);
+
+                _siege.Village.Kingdom = _siege.Army.Kingdom; // Move to AddPossessedAgent ?
 
                 _siege.InProgress = false;
                 this.Stop();

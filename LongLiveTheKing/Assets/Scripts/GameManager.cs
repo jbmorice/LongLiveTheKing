@@ -37,6 +37,7 @@ public class GameManager : MonoBehaviour
             VillageComponent village = (VillageComponent)obj;
             village.Init(this);
             VillageComponents.Add(village);
+            village.KingdomComponent.Kingdom.AddPossessedAgent(village.Village);
         }
 
         Object[] roads = GameObject.FindObjectsOfType(typeof(RoadComponent));

@@ -10,6 +10,7 @@ public class Kingdom : Agent
 
     public Kingdom(GameObject gameObject, string name, Color uiColor) : base(gameObject)
     {
+        _possessedAgents = new List<Agent>();
         Name = name;
         UiColor = uiColor;
         Debug.Log("I am a kingdom named " + Name + " !");
