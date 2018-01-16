@@ -6,14 +6,25 @@ public class Siege : Agent
     public Army Army { get; set; }
     public bool InProgress = true;
 
-    public Siege(GameObject gameObject, Army army, Village village) :
-        base(gameObject)
+    public void Init(GameManager gameManager, Army army, Village village)
     {
+        GameManager = gameManager;
         Army = army;
         Village = village;
+        GameManager.Sieges.Add(this);
         ResolveSiege resolveSiege = new ResolveSiege();
         resolveSiege.Start(this);
         Controller.AddAgentBehaviour(resolveSiege);
     }
 
+    void Update()
+    {
+        if (!InProgress)
+        {
+            GameManager.Armies.Remove(Army);
+            GameManager.Sieges.Remove(this);
+            Destroy(Army.gameObject);
+            Destroy(gameObject);
+        }
+    }
 }

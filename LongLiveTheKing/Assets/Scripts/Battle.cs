@@ -8,14 +8,36 @@ public class Battle : Agent
     public bool FirstHasFallen = false;
     public bool SecondHasFallen = false;
 
-    public Battle(GameObject gameObject, Army firstAgent, Army secondAgent):
-        base(gameObject)
+    public void Init(GameManager gameManager, Army firstAgent, Army secondAgent)
     {
+        GameManager = gameManager;
         FirstAgent = firstAgent;
         SecondAgent = secondAgent;
+        GameManager.Battles.Add(this);
         ResolveBattle resolveBattle = new ResolveBattle();
         resolveBattle.Start(this);
         Controller.AddAgentBehaviour(resolveBattle);
+    }
+
+    void Update()
+    {
+        if (!InProgress)
+        {
+            if (FirstHasFallen)
+            {
+                GameManager.Armies.Remove(FirstAgent);
+                GameManager.Battles.Remove(this);
+                Destroy(FirstAgent.gameObject);
+                Destroy(gameObject);
+            }
+            if (SecondHasFallen)
+            {
+                GameManager.Armies.Remove(SecondAgent);
+                GameManager.Battles.Remove(this);
+                Destroy(SecondAgent.gameObject);
+                Destroy(gameObject);
+            }
+        }
     }
 
 }

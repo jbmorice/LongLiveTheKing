@@ -19,9 +19,9 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4500620726552856}
-  - component: {fileID: 114023154662023864}
   - component: {fileID: 54760834775350144}
   - component: {fileID: 135512440305439868}
+  - component: {fileID: 114298033124599336}
   m_Layer: 0
   m_Name: Army
   m_TagString: Untagged
@@ -130,7 +130,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &114023154662023864
+--- !u!114 &114298033124599336
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -138,14 +138,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1143568416116426}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0a6dc8c7f70594141bab4eba2a082d2e, type: 3}
+  m_Script: {fileID: 11500000, guid: 129a24a21210c874181d9b5428ca2d01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   SiegePrefab: {fileID: 1041549550634568, guid: 677c8e49a1cc0a9439254f49f6576563,
     type: 2}
   BattlePrefab: {fileID: 1236047991658886, guid: 4158f5421596ca1418bc56a1d2ca9242,
     type: 2}
-  units: 0
 --- !u!135 &135512440305439868
 SphereCollider:
   m_ObjectHideFlags: 1

@@ -32,11 +32,11 @@ public class GoTo : AgentBehaviour
     {
         float speed = 3;
 
-        Vector3 start = _agent.GameObject.transform.position;
-        Vector3 end = _path[_position].GameObject.transform.position;
+        Vector3 start = _agent.gameObject.transform.position;
+        Vector3 end = _path[_position].gameObject.transform.position;
         float distance = Vector3.Distance(start, end);
         float temp = dt * speed / distance;
-        _agent.GameObject.transform.position =
+        _agent.gameObject.transform.position =
             Vector3.Lerp(start, end, temp);
     }
 }

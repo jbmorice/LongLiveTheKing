@@ -4,15 +4,17 @@ using UnityEngine;
 
 public class Village : Agent
 {
-    public Kingdom Kingdom { get; set; }
-    private int _population = 0;
-    private List<Road> _neighbouringRoads;
+    public Kingdom Kingdom;
+    public int Population = 10;
+    public List<Road> NeighbouringRoads;
 
-    public Village(GameObject gameObject, Kingdom kingdom) :
-        base(gameObject)
+    public void Init(GameManager gameManager, Kingdom kingdom)
     {
+        GameManager = gameManager;
         Kingdom = kingdom;
-        _neighbouringRoads = new List<Road>();
+        NeighbouringRoads = new List<Road>();
+        GameManager.Villages.Add(this);
+        Kingdom.AddPossessedAgent(this);
         Debug.Log("I am a village belonging to " + Kingdom.Name + "!");
 
         // Add default behaviours
@@ -21,22 +23,9 @@ public class Village : Agent
         Controller.AddAgentBehaviour(populationProduction);
     }
 
-    public int Population
-    {
-        get
-        {
-            return _population;
-        }
-
-        set
-        {
-            _population = value;
-        }
-    }
-
     internal bool IsNeighbour(Village destinationVillage)
     {
-        foreach (Road road in _neighbouringRoads)
+        foreach (Road road in NeighbouringRoads)
         {
             if ((road.FirstVillage == this && road.SecondVillage == destinationVillage) ||
                 (road.FirstVillage == destinationVillage && road.SecondVillage == this))
@@ -49,10 +38,10 @@ public class Village : Agent
 
     public bool AddNeighbouringRoad(Road road)
     {
-        bool contains = _neighbouringRoads.Contains(road);
+        bool contains = NeighbouringRoads.Contains(road);
         if (!contains)
         {
-            _neighbouringRoads.Add(road);
+            NeighbouringRoads.Add(road);
             return true;
         }
         return false;
@@ -60,7 +49,49 @@ public class Village : Agent
 
     public bool RemoveNeighbouringRoad(Road road)
     {
-        return _neighbouringRoads.Remove(road);
+        return NeighbouringRoads.Remove(road);
+    }
+
+    public Army SendArmy(Village destinationVillage)
+    {
+        if (this == destinationVillage) return null;
+        if (Population < 2) return null;
+        if (!IsNeighbour(destinationVillage)) return null;
+
+        GameObject obj = Instantiate(Kingdom.ArmyPrefab, transform);
+        Army army = obj.GetComponent<Army>();
+
+        int oldPopulation = Population;
+        int newPopulation = oldPopulation / 2;
+
+        army.Init(GameManager, Kingdom, newPopulation, this, destinationVillage);
+        Population = oldPopulation - newPopulation;
+
+        return army;
+    }
+
+    public bool IsUnderSiege()
+    {
+        foreach (Siege siege in GameManager.Sieges)
+        {
+            if (this == siege.Village) return true;
+        }
+        return false;
+    }
+
+    void Start()
+    {
+
+    }
+
+    void UpdateKingdom()
+    {
+        this.gameObject.transform.GetChild(0).GetComponent<MeshRenderer>().material.color = Kingdom.Material.color;
+    }
+
+    void Update()
+    {
+        UpdateKingdom();
     }
 
 }

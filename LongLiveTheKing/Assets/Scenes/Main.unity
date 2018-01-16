@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -295,12 +295,6 @@ Transform:
   m_PrefabParentObject: {fileID: 4473747706489118, guid: 4a553e0c31c888e4fa4f63b807b49903,
     type: 2}
   m_PrefabInternal: {fileID: 2020354668}
---- !u!114 &454161091 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114606128572010302, guid: 4a553e0c31c888e4fa4f63b807b49903,
-    type: 2}
-  m_PrefabInternal: {fileID: 2020354668}
-  m_Script: {fileID: 11500000, guid: 962180888571fd64a8e3d5ff64cef8bd, type: 3}
 --- !u!1 &560998907
 GameObject:
   m_ObjectHideFlags: 0
@@ -406,12 +400,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &758700047 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114944592578082526, guid: ecddfb8c8247a034ca9316948018f9ff,
-    type: 2}
-  m_PrefabInternal: {fileID: 1613734648}
-  m_Script: {fileID: 11500000, guid: 9ab6cb1e9717f0848bed43c97d44e879, type: 3}
 --- !u!1001 &845030974
 Prefab:
   m_ObjectHideFlags: 0
@@ -455,16 +443,24 @@ Prefab:
       propertyPath: m_Name
       value: Road12
       objectReference: {fileID: 0}
-    - target: {fileID: 114301219086562916, guid: 04004b4bceb920a468de455157ef4e07,
+    - target: {fileID: 0}
+      propertyPath: FirstVillage
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: SecondVillage
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 114898741777502790, guid: 04004b4bceb920a468de455157ef4e07,
         type: 2}
       propertyPath: FirstVillage
       value: 
-      objectReference: {fileID: 454161091}
-    - target: {fileID: 114301219086562916, guid: 04004b4bceb920a468de455157ef4e07,
+      objectReference: {fileID: 2020354669}
+    - target: {fileID: 114898741777502790, guid: 04004b4bceb920a468de455157ef4e07,
         type: 2}
       propertyPath: SecondVillage
       value: 
-      objectReference: {fileID: 1054337928}
+      objectReference: {fileID: 989502542}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 04004b4bceb920a468de455157ef4e07, type: 2}
   m_IsPrefabParent: 0
@@ -516,16 +512,24 @@ Prefab:
       propertyPath: m_Name
       value: Road01
       objectReference: {fileID: 0}
-    - target: {fileID: 114301219086562916, guid: 04004b4bceb920a468de455157ef4e07,
+    - target: {fileID: 0}
+      propertyPath: FirstVillage
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: SecondVillage
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 114898741777502790, guid: 04004b4bceb920a468de455157ef4e07,
         type: 2}
       propertyPath: FirstVillage
       value: 
-      objectReference: {fileID: 2079392764}
-    - target: {fileID: 114301219086562916, guid: 04004b4bceb920a468de455157ef4e07,
+      objectReference: {fileID: 1120511806}
+    - target: {fileID: 114898741777502790, guid: 04004b4bceb920a468de455157ef4e07,
         type: 2}
       propertyPath: SecondVillage
       value: 
-      objectReference: {fileID: 454161091}
+      objectReference: {fileID: 2020354669}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 04004b4bceb920a468de455157ef4e07, type: 2}
   m_IsPrefabParent: 0
@@ -572,15 +576,25 @@ Prefab:
       propertyPath: m_Name
       value: Village2
       objectReference: {fileID: 0}
-    - target: {fileID: 114606128572010302, guid: 4a553e0c31c888e4fa4f63b807b49903,
-        type: 2}
+    - target: {fileID: 0}
       propertyPath: KingdomComponent
       value: 
-      objectReference: {fileID: 758700047}
+      objectReference: {fileID: 0}
+    - target: {fileID: 114324975414770784, guid: 4a553e0c31c888e4fa4f63b807b49903,
+        type: 2}
+      propertyPath: Kingdom
+      value: 
+      objectReference: {fileID: 1613734650}
     m_RemovedComponents:
     - {fileID: 65995920379965090, guid: 4a553e0c31c888e4fa4f63b807b49903, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 4a553e0c31c888e4fa4f63b807b49903, type: 2}
   m_IsPrefabParent: 0
+--- !u!114 &989502542 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114324975414770784, guid: 4a553e0c31c888e4fa4f63b807b49903,
+    type: 2}
+  m_PrefabInternal: {fileID: 989502541}
+  m_Script: {fileID: 11500000, guid: da63dea027c827f41925f874fe4b5aed, type: 3}
 --- !u!1 &992702334
 GameObject:
   m_ObjectHideFlags: 0
@@ -612,12 +626,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1054337928 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114606128572010302, guid: 4a553e0c31c888e4fa4f63b807b49903,
-    type: 2}
-  m_PrefabInternal: {fileID: 989502541}
-  m_Script: {fileID: 11500000, guid: 962180888571fd64a8e3d5ff64cef8bd, type: 3}
 --- !u!4 &1054337929 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4473747706489118, guid: 4a553e0c31c888e4fa4f63b807b49903,
@@ -671,16 +679,30 @@ Prefab:
       propertyPath: m_Name
       value: NeutralKingdom
       objectReference: {fileID: 0}
-    - target: {fileID: 114944592578082526, guid: ecddfb8c8247a034ca9316948018f9ff,
+    - target: {fileID: 0}
+      propertyPath: Name
+      value: Neutral
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: Material
+      value: 
+      objectReference: {fileID: 2100000, guid: e0a33f45ed9db7e45a9a8e52d63c1f4d, type: 2}
+    - target: {fileID: 114671909791432394, guid: ecddfb8c8247a034ca9316948018f9ff,
         type: 2}
       propertyPath: Name
       value: Neutral
       objectReference: {fileID: 0}
-    - target: {fileID: 114944592578082526, guid: ecddfb8c8247a034ca9316948018f9ff,
+    - target: {fileID: 114671909791432394, guid: ecddfb8c8247a034ca9316948018f9ff,
         type: 2}
       propertyPath: Material
       value: 
       objectReference: {fileID: 2100000, guid: e0a33f45ed9db7e45a9a8e52d63c1f4d, type: 2}
+    - target: {fileID: 114671909791432394, guid: ecddfb8c8247a034ca9316948018f9ff,
+        type: 2}
+      propertyPath: ArmyPrefab
+      value: 
+      objectReference: {fileID: 1143568416116426, guid: 8d38c35bf1c8a0047b4a7e010f4c6115,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ecddfb8c8247a034ca9316948018f9ff, type: 2}
   m_IsPrefabParent: 0
@@ -689,6 +711,12 @@ Transform:
   m_PrefabParentObject: {fileID: 4191230276638776, guid: ecddfb8c8247a034ca9316948018f9ff,
     type: 2}
   m_PrefabInternal: {fileID: 1096153058}
+--- !u!114 &1096153060 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114671909791432394, guid: ecddfb8c8247a034ca9316948018f9ff,
+    type: 2}
+  m_PrefabInternal: {fileID: 1096153058}
+  m_Script: {fileID: 11500000, guid: ff72abaee078c34429242c36b8109c7f, type: 3}
 --- !u!1001 &1120511804
 Prefab:
   m_ObjectHideFlags: 0
@@ -732,11 +760,15 @@ Prefab:
       propertyPath: m_Name
       value: Village0
       objectReference: {fileID: 0}
-    - target: {fileID: 114606128572010302, guid: 4a553e0c31c888e4fa4f63b807b49903,
-        type: 2}
+    - target: {fileID: 0}
       propertyPath: KingdomComponent
       value: 
-      objectReference: {fileID: 1730488270}
+      objectReference: {fileID: 0}
+    - target: {fileID: 114324975414770784, guid: 4a553e0c31c888e4fa4f63b807b49903,
+        type: 2}
+      propertyPath: Kingdom
+      value: 
+      objectReference: {fileID: 1875909000}
     m_RemovedComponents:
     - {fileID: 65995920379965090, guid: 4a553e0c31c888e4fa4f63b807b49903, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 4a553e0c31c888e4fa4f63b807b49903, type: 2}
@@ -746,6 +778,12 @@ Transform:
   m_PrefabParentObject: {fileID: 4473747706489118, guid: 4a553e0c31c888e4fa4f63b807b49903,
     type: 2}
   m_PrefabInternal: {fileID: 1120511804}
+--- !u!114 &1120511806 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114324975414770784, guid: 4a553e0c31c888e4fa4f63b807b49903,
+    type: 2}
+  m_PrefabInternal: {fileID: 1120511804}
+  m_Script: {fileID: 11500000, guid: da63dea027c827f41925f874fe4b5aed, type: 3}
 --- !u!1 &1573811342
 GameObject:
   m_ObjectHideFlags: 0
@@ -815,8 +853,7 @@ Prefab:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 114944592578082526, guid: ecddfb8c8247a034ca9316948018f9ff,
-        type: 2}
+    - target: {fileID: 0}
       propertyPath: Name
       value: England
       objectReference: {fileID: 0}
@@ -824,22 +861,35 @@ Prefab:
       propertyPath: m_Name
       value: England
       objectReference: {fileID: 0}
-    - target: {fileID: 114944592578082526, guid: ecddfb8c8247a034ca9316948018f9ff,
+    - target: {fileID: 0}
+      propertyPath: Material
+      value: 
+      objectReference: {fileID: 2100000, guid: 0acccd2a346381b46824da907097af63, type: 2}
+    - target: {fileID: 0}
+      propertyPath: ArmyPrefab
+      value: 
+      objectReference: {fileID: 1143568416116426, guid: 8d38c35bf1c8a0047b4a7e010f4c6115,
+        type: 2}
+    - target: {fileID: 0}
+      propertyPath: IA
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114671909791432394, guid: ecddfb8c8247a034ca9316948018f9ff,
+        type: 2}
+      propertyPath: Name
+      value: England
+      objectReference: {fileID: 0}
+    - target: {fileID: 114671909791432394, guid: ecddfb8c8247a034ca9316948018f9ff,
         type: 2}
       propertyPath: Material
       value: 
       objectReference: {fileID: 2100000, guid: 0acccd2a346381b46824da907097af63, type: 2}
-    - target: {fileID: 114944592578082526, guid: ecddfb8c8247a034ca9316948018f9ff,
+    - target: {fileID: 114671909791432394, guid: ecddfb8c8247a034ca9316948018f9ff,
         type: 2}
       propertyPath: ArmyPrefab
       value: 
       objectReference: {fileID: 1143568416116426, guid: 8d38c35bf1c8a0047b4a7e010f4c6115,
         type: 2}
-    - target: {fileID: 114944592578082526, guid: ecddfb8c8247a034ca9316948018f9ff,
-        type: 2}
-      propertyPath: IA
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ecddfb8c8247a034ca9316948018f9ff, type: 2}
   m_IsPrefabParent: 0
@@ -848,12 +898,12 @@ Transform:
   m_PrefabParentObject: {fileID: 4191230276638776, guid: ecddfb8c8247a034ca9316948018f9ff,
     type: 2}
   m_PrefabInternal: {fileID: 1613734648}
---- !u!114 &1730488270 stripped
+--- !u!114 &1613734650 stripped
 MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114944592578082526, guid: ecddfb8c8247a034ca9316948018f9ff,
+  m_PrefabParentObject: {fileID: 114671909791432394, guid: ecddfb8c8247a034ca9316948018f9ff,
     type: 2}
-  m_PrefabInternal: {fileID: 1875908998}
-  m_Script: {fileID: 11500000, guid: 9ab6cb1e9717f0848bed43c97d44e879, type: 3}
+  m_PrefabInternal: {fileID: 1613734648}
+  m_Script: {fileID: 11500000, guid: ff72abaee078c34429242c36b8109c7f, type: 3}
 --- !u!1 &1756047374
 GameObject:
   m_ObjectHideFlags: 0
@@ -881,14 +931,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74ae97ca34fcaa649939dbd92bd2b921, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  KingdomComponents: []
-  VillageComponents: []
-  RoadComponents: []
-  ArmyComponents: []
-  BattleComponents: []
-  SiegesComponents: []
+  Kingdoms: []
+  Villages: []
+  Roads: []
+  Armies: []
+  Battles: []
+  Sieges: []
   IA: {fileID: 662086304}
-  Player: {fileID: 1730488270}
+  Player: {fileID: 1875909000}
 --- !u!4 &1756047376
 Transform:
   m_ObjectHideFlags: 0
@@ -976,27 +1026,39 @@ Prefab:
       propertyPath: m_Name
       value: France
       objectReference: {fileID: 0}
-    - target: {fileID: 114944592578082526, guid: ecddfb8c8247a034ca9316948018f9ff,
+    - target: {fileID: 0}
+      propertyPath: Name
+      value: France
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: Material
+      value: 
+      objectReference: {fileID: 2100000, guid: 9289c3fc9686e714bb49d97e822f4a16, type: 2}
+    - target: {fileID: 0}
+      propertyPath: ArmyPrefab
+      value: 
+      objectReference: {fileID: 1143568416116426, guid: 8d38c35bf1c8a0047b4a7e010f4c6115,
+        type: 2}
+    - target: {fileID: 0}
+      propertyPath: Playable
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114671909791432394, guid: ecddfb8c8247a034ca9316948018f9ff,
         type: 2}
       propertyPath: Name
       value: France
       objectReference: {fileID: 0}
-    - target: {fileID: 114944592578082526, guid: ecddfb8c8247a034ca9316948018f9ff,
+    - target: {fileID: 114671909791432394, guid: ecddfb8c8247a034ca9316948018f9ff,
         type: 2}
       propertyPath: Material
       value: 
       objectReference: {fileID: 2100000, guid: 9289c3fc9686e714bb49d97e822f4a16, type: 2}
-    - target: {fileID: 114944592578082526, guid: ecddfb8c8247a034ca9316948018f9ff,
+    - target: {fileID: 114671909791432394, guid: ecddfb8c8247a034ca9316948018f9ff,
         type: 2}
       propertyPath: ArmyPrefab
       value: 
       objectReference: {fileID: 1143568416116426, guid: 8d38c35bf1c8a0047b4a7e010f4c6115,
         type: 2}
-    - target: {fileID: 114944592578082526, guid: ecddfb8c8247a034ca9316948018f9ff,
-        type: 2}
-      propertyPath: Playable
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ecddfb8c8247a034ca9316948018f9ff, type: 2}
   m_IsPrefabParent: 0
@@ -1005,6 +1067,12 @@ Transform:
   m_PrefabParentObject: {fileID: 4191230276638776, guid: ecddfb8c8247a034ca9316948018f9ff,
     type: 2}
   m_PrefabInternal: {fileID: 1875908998}
+--- !u!114 &1875909000 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114671909791432394, guid: ecddfb8c8247a034ca9316948018f9ff,
+    type: 2}
+  m_PrefabInternal: {fileID: 1875908998}
+  m_Script: {fileID: 11500000, guid: ff72abaee078c34429242c36b8109c7f, type: 3}
 --- !u!1001 &2020354668
 Prefab:
   m_ObjectHideFlags: 0
@@ -1048,18 +1116,22 @@ Prefab:
       propertyPath: m_Name
       value: Village1
       objectReference: {fileID: 0}
-    - target: {fileID: 114606128572010302, guid: 4a553e0c31c888e4fa4f63b807b49903,
-        type: 2}
+    - target: {fileID: 0}
       propertyPath: KingdomComponent
       value: 
-      objectReference: {fileID: 1730488270}
+      objectReference: {fileID: 0}
+    - target: {fileID: 114324975414770784, guid: 4a553e0c31c888e4fa4f63b807b49903,
+        type: 2}
+      propertyPath: Kingdom
+      value: 
+      objectReference: {fileID: 1096153060}
     m_RemovedComponents:
     - {fileID: 65995920379965090, guid: 4a553e0c31c888e4fa4f63b807b49903, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 4a553e0c31c888e4fa4f63b807b49903, type: 2}
   m_IsPrefabParent: 0
---- !u!114 &2079392764 stripped
+--- !u!114 &2020354669 stripped
 MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114606128572010302, guid: 4a553e0c31c888e4fa4f63b807b49903,
+  m_PrefabParentObject: {fileID: 114324975414770784, guid: 4a553e0c31c888e4fa4f63b807b49903,
     type: 2}
-  m_PrefabInternal: {fileID: 1120511804}
-  m_Script: {fileID: 11500000, guid: 962180888571fd64a8e3d5ff64cef8bd, type: 3}
+  m_PrefabInternal: {fileID: 2020354668}
+  m_Script: {fileID: 11500000, guid: da63dea027c827f41925f874fe4b5aed, type: 3}

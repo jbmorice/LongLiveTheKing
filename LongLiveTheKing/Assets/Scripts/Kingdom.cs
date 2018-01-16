@@ -3,25 +3,27 @@ using UnityEngine;
 
 public class Kingdom : Agent
 {
-    public string Name { get; private set; }
-    private int _gold = 0;
-    public Color UiColor { get; private set; }
-    private List<Agent> _possessedAgents;
+    public string Name;
+    public Material Material;
+    public int Gold = 0;
+    public List<Agent> PossessedAgents;
+    public GameObject ArmyPrefab;
+    public bool IA;
 
-    public Kingdom(GameObject gameObject, string name, Color uiColor) : base(gameObject)
+    public void Init(GameManager gameManager)
     {
-        _possessedAgents = new List<Agent>();
-        Name = name;
-        UiColor = uiColor;
+        GameManager = gameManager;
+        PossessedAgents = new List<Agent>();
+        GameManager.Kingdoms.Add(this);
         Debug.Log("I am a kingdom named " + Name + " !");
     }
 
     public bool AddPossessedAgent(Agent agent)
     {
-        bool contains = _possessedAgents.Contains(agent);
+        bool contains = PossessedAgents.Contains(agent);
         if (!contains)
         {
-            _possessedAgents.Add(agent);
+            PossessedAgents.Add(agent);
             if (agent.GetType() == typeof(Village))
             {
                 Village village = (Village) agent;
@@ -34,6 +36,6 @@ public class Kingdom : Agent
 
     public bool RemovePossessedAgent(Agent agent)
     {
-        return _possessedAgents.Remove(agent);
+        return PossessedAgents.Remove(agent);
     }
 }

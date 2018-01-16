@@ -6,103 +6,94 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     private bool _clickHold = false;
-    private VillageComponent _sourceVillage = null;
-    private VillageComponent _destinationVillage = null;
+    private Village _sourceVillage = null;
+    private Village _destinationVillage = null;
 
-    public List<KingdomComponent> KingdomComponents;
-    public List<VillageComponent> VillageComponents;
-    public List<RoadComponent> RoadComponents;
-    public List<ArmyComponent> ArmyComponents;
-    public List<BattleComponent> BattleComponents;
-    public List<SiegeComponent> SiegesComponents;
-    public IAComponent IA;
+    public List<Kingdom> Kingdoms;
+    public List<Village> Villages;
+    public List<Road> Roads;
+    public List<Army> Armies;
+    public List<Battle> Battles;
+    public List<Siege> Sieges;
+    public IA IA;
 
-    public KingdomComponent Player;
+    public Kingdom Player;
 
-    private void InitComponents()
+    private void Init()
     {
-        Object[] kingdoms = GameObject.FindObjectsOfType(typeof(KingdomComponent));
+        Object[] kingdoms = GameObject.FindObjectsOfType(typeof(Kingdom));
 
         foreach (Object obj in kingdoms)
         {
-            KingdomComponent kingdom = (KingdomComponent)obj;
+            Kingdom kingdom = (Kingdom) obj;
             kingdom.Init(this);
-            KingdomComponents.Add(kingdom);
         }
 
-        Object[] villages = GameObject.FindObjectsOfType(typeof(VillageComponent));
+        
+        Object[] villages = GameObject.FindObjectsOfType(typeof(Village));
 
         foreach (Object obj in villages)
         {
-            VillageComponent village = (VillageComponent)obj;
-            village.Init(this);
-            VillageComponents.Add(village);
-            village.KingdomComponent.Kingdom.AddPossessedAgent(village.Village);
+            Village village = (Village) obj;
+            village.Init(this, village.Kingdom);
         }
 
-        Object[] roads = GameObject.FindObjectsOfType(typeof(RoadComponent));
+        Object[] roads = GameObject.FindObjectsOfType(typeof(Road));
 
         foreach (Object obj in roads)
         {
-            RoadComponent road = (RoadComponent)obj;
-            road.Init(this);
-            RoadComponents.Add(road);
+            Road road = (Road) obj;
+            road.Init(this, road.FirstVillage, road.SecondVillage);
         }
 
-        ArmyComponents = new List<ArmyComponent>();
-        SiegesComponents = new List<SiegeComponent>();
-        BattleComponents = new List<BattleComponent>();
-
         IA.Init(this);
-    }
-
-    public void AddArmyComponent(ArmyComponent armyComponent)
-    {
-        ArmyComponents.Add(armyComponent);
+        
     }
 
     void Start()
     {
-        KingdomComponents = new List<KingdomComponent>();
-        VillageComponents = new List<VillageComponent>();
-        RoadComponents = new List<RoadComponent>();
+        Kingdoms = new List<Kingdom>();
+        Villages = new List<Village>();
+        Roads = new List<Road>();
+        Armies = new List<Army>();
+        Sieges = new List<Siege>();
+        Battles = new List<Battle>();
 
-
-        InitComponents();
+        Init();
     }
 
     void UpdateAgentBehaviours()
     {
-        foreach (KingdomComponent kingdomComponent in KingdomComponents)
+        foreach (Kingdom kingdom in Kingdoms)
         {
-            kingdomComponent.Kingdom.Controller.Update(Time.deltaTime);
+            kingdom.Controller.Update(Time.deltaTime);
+        }
+        
+        foreach (Village village in Villages)
+        {
+            village.Controller.Update(Time.deltaTime);
+        }
+        
+        foreach (Road road in Roads)
+        {
+            road.Controller.Update(Time.deltaTime);
         }
 
-        foreach (VillageComponent villageComponent in VillageComponents)
+        foreach (Army army in Armies)
         {
-            villageComponent.Village.Controller.Update(Time.deltaTime);
+            army.Controller.Update(Time.deltaTime);
         }
 
-        foreach (RoadComponent roadComponent in RoadComponents)
+        foreach (Siege siege in Sieges)
         {
-            roadComponent.Road.Controller.Update(Time.deltaTime);
+            siege.Controller.Update(Time.deltaTime);
         }
 
-        foreach (ArmyComponent armyComponent in ArmyComponents)
+        foreach (Battle battle in Battles)
         {
-            armyComponent.Army.Controller.Update(Time.deltaTime);
+            battle.Controller.Update(Time.deltaTime);
         }
-
-        foreach (SiegeComponent siegeComponent in SiegesComponents)
-        {
-            siegeComponent.Siege.Controller.Update(Time.deltaTime);
-        }
-
-        foreach (BattleComponent battleComponent in BattleComponents)
-        {
-            battleComponent.Battle.Controller.Update(Time.deltaTime);
-        }
-
+        
     }
 
     void MoveArmy()
@@ -113,8 +104,8 @@ public class GameManager : MonoBehaviour
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit))
             {
-                _sourceVillage = hit.transform.gameObject.GetComponent<VillageComponent>();
-                if (_sourceVillage == null || !_sourceVillage.KingdomComponent.Kingdom.Equals(Player.Kingdom)) return;
+                _sourceVillage = hit.transform.gameObject.GetComponent<Village>();
+                if (_sourceVillage == null || !_sourceVillage.Kingdom.Equals(Player)) return;
                 _clickHold = true;
             }
         }
@@ -126,15 +117,11 @@ public class GameManager : MonoBehaviour
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit))
             {
-                _destinationVillage = hit.transform.gameObject.GetComponent<VillageComponent>();
+                _destinationVillage = hit.transform.gameObject.GetComponent<Village>();
                 if (_destinationVillage == null) return;
             }
 
-            ArmyComponent armyComponent = _sourceVillage.SendArmy(_destinationVillage);
-            if (armyComponent != null)
-            {
-                AddArmyComponent(armyComponent);
-            }
+            _sourceVillage.SendArmy(_destinationVillage);
 
             // Reset attributes
             _sourceVillage = null;

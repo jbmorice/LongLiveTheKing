@@ -19,7 +19,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4502835624111268}
-  - component: {fileID: 114465633820598102}
+  - component: {fileID: 114421568406253570}
   m_Layer: 0
   m_Name: Battle
   m_TagString: Untagged
@@ -113,7 +113,7 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1949429809452894}
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &114465633820598102
+--- !u!114 &114421568406253570
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -121,9 +121,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1236047991658886}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 21b95e88236ebc4449074de1c7b3dcb8, type: 3}
+  m_Script: {fileID: 11500000, guid: cf9c6721706f5114f9244e0e9cce1730, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  InProgress: 1
+  FirstHasFallen: 0
+  SecondHasFallen: 0
 --- !u!136 &136529122408135216
 CapsuleCollider:
   m_ObjectHideFlags: 1

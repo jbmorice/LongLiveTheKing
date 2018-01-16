@@ -19,7 +19,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4191230276638776}
-  - component: {fileID: 114944592578082526}
+  - component: {fileID: 114671909791432394}
   m_Layer: 0
   m_Name: Kingdom
   m_TagString: Untagged
@@ -40,7 +40,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114944592578082526
+--- !u!114 &114671909791432394
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -48,8 +48,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1655725311750552}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9ab6cb1e9717f0848bed43c97d44e879, type: 3}
+  m_Script: {fileID: 11500000, guid: ff72abaee078c34429242c36b8109c7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Name: 
+  Gold: 0
+  PossessedAgents: []
+  ArmyPrefab: {fileID: 0}
+  IA: 0
   Material: {fileID: 0}
