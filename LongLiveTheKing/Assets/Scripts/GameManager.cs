@@ -105,7 +105,7 @@ public class GameManager : MonoBehaviour
             if (Physics.Raycast(ray, out hit))
             {
                 _sourceVillage = hit.transform.gameObject.GetComponent<Village>();
-                if (_sourceVillage == null || !_sourceVillage.Kingdom.Equals(Player)) return;
+                if (_sourceVillage == null || !_sourceVillage.Kingdom.Equals(Player) || _sourceVillage.IsUnderSiege()) return;
                 _clickHold = true;
             }
         }

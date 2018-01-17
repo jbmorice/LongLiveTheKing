@@ -6,6 +6,8 @@ public class Village : Agent
 {
     public Kingdom Kingdom;
     public int Population = 10;
+    public int MaxPopulation = 100;
+    public bool IsPopulationIncreasing = true;
     public List<Road> NeighbouringRoads;
 
     public void Init(GameManager gameManager, Kingdom kingdom)
@@ -21,6 +23,11 @@ public class Village : Agent
         PopulationProduction populationProduction = new PopulationProduction();
         populationProduction.Start(this); // #FIXME : Override AgentBehaviour.Start() instead of overload
         Controller.AddAgentBehaviour(populationProduction);
+
+        PopulationDiminution populationDiminution = new PopulationDiminution();
+        populationDiminution.Start(this);
+        populationDiminution.Pause();
+        Controller.AddAgentBehaviour(populationDiminution);
     }
 
     internal bool IsNeighbour(Village destinationVillage)
@@ -92,6 +99,43 @@ public class Village : Agent
     void Update()
     {
         UpdateKingdom();
+
+        if (Population == MaxPopulation)
+        {
+            if (IsPopulationIncreasing)
+            {
+                foreach (PopulationProduction populationProduction in Controller.GetAgentBehaviours<PopulationProduction>())
+                {
+                    populationProduction.Pause();
+                }
+                IsPopulationIncreasing = false;
+            }
+            else
+            {
+                Controller.GetAgentBehaviour<PopulationDiminution>().Pause();
+            }
+        }
+        else if (Population > MaxPopulation && IsPopulationIncreasing)
+        {
+            Controller.GetAgentBehaviour<PopulationDiminution>().Resume();
+
+            foreach (PopulationProduction populationProduction in Controller.GetAgentBehaviours<PopulationProduction>())
+            {
+                populationProduction.Pause();
+            }
+
+            IsPopulationIncreasing = false;
+        }
+        else if(!IsPopulationIncreasing && Population < MaxPopulation)
+        {
+            Controller.GetAgentBehaviour<PopulationDiminution>().Pause();
+
+            foreach (PopulationProduction populationProduction in Controller.GetAgentBehaviours<PopulationProduction>())
+            {
+                populationProduction.Resume();
+            }
+            IsPopulationIncreasing = true;
+        }
     }
 
 }
