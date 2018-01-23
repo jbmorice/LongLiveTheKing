@@ -28,13 +28,13 @@ public class Army : MovingAgent
     void OnTriggerEnter(Collider other)
     {
         Village village = other.transform.GetComponent<Village>();
-        if (village && CurrentDestination == Path.Count-1)
+        if (village && village == Path[Path.Count-1])
         {
             Village collidedVillage = other.gameObject.GetComponent<Village>();
 
             if (collidedVillage.Kingdom == Kingdom)
             {
-                Debug.Log("J'ai rencontré un village allié !");
+                //Debug.Log("J'ai rencontré un village allié !");
 
                 collidedVillage.Population += Units;
                 GameManager.Armies.Remove(this);
@@ -42,7 +42,7 @@ public class Army : MovingAgent
             }
             else
             {
-                Debug.Log("J'ai rencontré un village ennemi !");
+                //Debug.Log("J'ai rencontré un village ennemi !");
                 //Controller.GetAgentBehaviour<GoTo>().Stop();
                 GameObject obj = Instantiate(SiegePrefab, transform);
                 obj.transform.position = (transform.position + collidedVillage.transform.position) / 2;
@@ -51,20 +51,20 @@ public class Army : MovingAgent
                 GameManager.Sieges.Add(siege);
             }
         }
-        if (village && village == Path[CurrentDestination])
+        else if (village && village == Path[CurrentDestination])
         {
             Village collidedVillage = other.gameObject.GetComponent<Village>();
 
             if (collidedVillage.Kingdom == Kingdom)
             {
-                Debug.Log("J'ai rencontré un village allié !");
+                //Debug.Log("J'ai rencontré un village allié !");
 
                 CurrentDestination++;
                 Controller.GetAgentBehaviour<GoTo>().Stop();
 
                 Vector3 vector = Path[CurrentDestination].transform.position - Path[CurrentDestination - 1].transform.position;
                 vector = vector.normalized;
-                transform.position = Path[CurrentDestination - 1].transform.position + 2*vector;
+                transform.position = Path[CurrentDestination - 1].transform.position + Path[CurrentDestination - 1].GetComponent<CapsuleCollider>().radius * vector;
 
                 GoTo goTo = new GoTo();
                 goTo.Start(this, Path[CurrentDestination - 1], Path[CurrentDestination]);
@@ -72,7 +72,7 @@ public class Army : MovingAgent
             }
             else
             {
-                Debug.Log("J'ai rencontré un village ennemi !");
+                //Debug.Log("J'ai rencontré un village ennemi !");
                 //Controller.GetAgentBehaviour<GoTo>().Stop();
                 GameObject obj = Instantiate(SiegePrefab, transform);
                 obj.transform.position = (transform.position + collidedVillage.transform.position) / 2;
@@ -87,7 +87,7 @@ public class Army : MovingAgent
         {
             if (collidedArmy.Kingdom == Kingdom)
             {
-                Debug.Log("J'ai rencontré une armée allié !");
+                //Debug.Log("J'ai rencontré une armée allié !");
                 bool iBesiege = Besiege();
                 bool armyBesiege = collidedArmy.Besiege();
                 if (iBesiege || armyBesiege)
@@ -108,7 +108,7 @@ public class Army : MovingAgent
             }
             else if (!InBattleAgainst(collidedArmy))
             {
-                Debug.Log("J'ai rencontré une armée ennemi !");
+                //Debug.Log("J'ai rencontré une armée ennemi !");
                 GameObject obj = Instantiate(BattlePrefab, transform);
                 obj.transform.position = (transform.position + collidedArmy.transform.position) / 2;
                 Battle battle = obj.GetComponent<Battle>();

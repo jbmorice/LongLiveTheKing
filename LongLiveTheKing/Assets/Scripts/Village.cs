@@ -84,17 +84,19 @@ public class Village : Agent
         if (Population < 2) return null;
         //if (!IsNeighbour(destinationVillage)) return null;
 
-        Vector3 vector = destinationVillage.transform.position - transform.position;
+        List<Village> path = aStar(this, destinationVillage);
+
+        Vector3 vector = path[1].transform.position - transform.position;
         vector = vector.normalized;
 
         GameObject obj = Instantiate(Kingdom.ArmyPrefab, transform);
-        obj.transform.position = transform.position + 2 * vector;
+        obj.transform.position = transform.position + (GetComponent<CapsuleCollider>().radius) * vector;
         Army army = obj.GetComponent<Army>();
 
         int oldPopulation = Population;
         int newPopulation = oldPopulation / 2;
 
-        army.Init(GameManager, Kingdom, newPopulation, this, aStar(this, destinationVillage));
+        army.Init(GameManager, Kingdom, newPopulation, this, path );
         Population = oldPopulation - newPopulation;
 
         //army.Path = aStar(this, destinationVillage);

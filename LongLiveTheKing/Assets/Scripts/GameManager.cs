@@ -106,6 +106,7 @@ public class GameManager : MonoBehaviour
             {
                 _sourceVillage = hit.transform.gameObject.GetComponent<Village>();
                 if (_sourceVillage == null || !_sourceVillage.Kingdom.Equals(Player) || _sourceVillage.IsUnderSiege()) return;
+                Debug.Log("Hey j'appuie sur un de mes villages");
                 _clickHold = true;
             }
         }
