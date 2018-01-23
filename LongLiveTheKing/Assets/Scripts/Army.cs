@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections.Generic;
 
 public class Army : MovingAgent
 {
@@ -6,24 +7,28 @@ public class Army : MovingAgent
     public Kingdom Kingdom;
     public GameObject SiegePrefab;
     public GameObject BattlePrefab;
+    public List<Village> Path;
+    public int CurrentDestination;
 
-    public void Init(GameManager gameManager, Kingdom kingdom, int units, Village origin, Agent destination)
+    public void Init(GameManager gameManager, Kingdom kingdom, int units, Village origin, List<Village> path)
     {
         GameManager = gameManager;
         Kingdom = kingdom;
         Units = units;
+        Path = path;
         GameManager.Armies.Add(this);
+        CurrentDestination = 1;
 
         // Add default behaviours
         GoTo goTo = new GoTo();;
-        goTo.Start(this, origin, destination);
+        goTo.Start(this, origin, Path[1]);
         Controller.AddAgentBehaviour(goTo);
     }
 
     void OnTriggerEnter(Collider other)
     {
         Village village = other.transform.GetComponent<Village>();
-        if (village && village == Controller.GetAgentBehaviour<GoTo>().Destination)
+        if (village && CurrentDestination == Path.Count-1)
         {
             Village collidedVillage = other.gameObject.GetComponent<Village>();
 
@@ -34,6 +39,36 @@ public class Army : MovingAgent
                 collidedVillage.Population += Units;
                 GameManager.Armies.Remove(this);
                 Destroy(gameObject);
+            }
+            else
+            {
+                Debug.Log("J'ai rencontré un village ennemi !");
+                //Controller.GetAgentBehaviour<GoTo>().Stop();
+                GameObject obj = Instantiate(SiegePrefab, transform);
+                obj.transform.position = (transform.position + collidedVillage.transform.position) / 2;
+                Siege siege = obj.GetComponent<Siege>();
+                siege.Init(GameManager, this, collidedVillage);
+                GameManager.Sieges.Add(siege);
+            }
+        }
+        if (village && village == Path[CurrentDestination])
+        {
+            Village collidedVillage = other.gameObject.GetComponent<Village>();
+
+            if (collidedVillage.Kingdom == Kingdom)
+            {
+                Debug.Log("J'ai rencontré un village allié !");
+
+                CurrentDestination++;
+                Controller.GetAgentBehaviour<GoTo>().Stop();
+
+                Vector3 vector = Path[CurrentDestination].transform.position - Path[CurrentDestination - 1].transform.position;
+                vector = vector.normalized;
+                transform.position = Path[CurrentDestination - 1].transform.position + 2*vector;
+
+                GoTo goTo = new GoTo();
+                goTo.Start(this, Path[CurrentDestination - 1], Path[CurrentDestination]);
+                Controller.AddAgentBehaviour(goTo);
             }
             else
             {
