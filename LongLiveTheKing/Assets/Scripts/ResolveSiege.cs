@@ -16,7 +16,7 @@ public class ResolveSiege : AgentBehaviour
             {
                 behaviour.Pause();
             }
-            Debug.Log(_siege.Army.Controller.GetAgentBehaviours<GoTo>().Count);
+
             _siege.Army.Controller.GetAgentBehaviour<GoTo>().Stop();
             return true;
         }

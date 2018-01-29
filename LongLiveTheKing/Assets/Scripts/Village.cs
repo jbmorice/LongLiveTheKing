@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Village : Agent
 {
@@ -10,6 +11,8 @@ public class Village : Agent
     public bool IsPopulationIncreasing = true;
     public List<Road> NeighbouringRoads;
 
+    public GameObject VillageUIPrefab;
+
     public void Init(GameManager gameManager, Kingdom kingdom)
     {
         GameManager = gameManager;
@@ -18,6 +21,10 @@ public class Village : Agent
         GameManager.Villages.Add(this);
         Kingdom.AddPossessedAgent(this);
         Debug.Log("I am a village belonging to " + Kingdom.Name + "!");
+
+        // Generate UI 
+        GameObject villageUI = Instantiate(VillageUIPrefab, gameObject.transform);
+        villageUI.GetComponent<VillageUI>().Init(this);
 
         // Add default behaviours
         PopulationProduction populationProduction = new PopulationProduction();
@@ -217,18 +224,20 @@ public class Village : Agent
         return false;
     }
 
-    void Start()
-    {
-
-    }
-
     void UpdateKingdom()
     {
         this.gameObject.transform.GetChild(0).GetComponent<MeshRenderer>().material.color = Kingdom.Material.color;
     }
 
+    void UpdateUI()
+    {
+
+
+    }
+
     void Update()
     {
+        UpdateUI();
         UpdateKingdom();
 
         if (Population == MaxPopulation)
