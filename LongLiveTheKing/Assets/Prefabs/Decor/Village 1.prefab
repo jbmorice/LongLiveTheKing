@@ -488,6 +488,8 @@ MonoBehaviour:
   MaxPopulation: 100
   IsPopulationIncreasing: 1
   NeighbouringRoads: []
+  VillageUIPrefab: {fileID: 1384975952009304, guid: 4cd4930eb46f3424e8231b88e21df564,
+    type: 2}
 --- !u!135 &135152779437470812
 SphereCollider:
   m_ObjectHideFlags: 1

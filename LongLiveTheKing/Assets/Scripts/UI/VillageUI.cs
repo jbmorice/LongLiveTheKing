@@ -10,7 +10,7 @@ public class VillageUI : MonoBehaviour
     public void Init(Village village)
     {
         Village = village;
-        transform.SetParent(GameObject.Find("Canvas").transform, true); // #TDOD: Check the differences with the boolean
+        transform.SetParent(GameObject.Find("UICanvas").transform, true); // #TDOD: Check what the boolean actually does
         name = name + " - " + Village.name;
     }
 	
