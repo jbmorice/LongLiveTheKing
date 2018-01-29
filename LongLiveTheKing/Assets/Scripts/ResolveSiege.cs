@@ -16,6 +16,7 @@ public class ResolveSiege : AgentBehaviour
             {
                 behaviour.Pause();
             }
+            Debug.Log(_siege.Army.Controller.GetAgentBehaviours<GoTo>().Count);
             _siege.Army.Controller.GetAgentBehaviour<GoTo>().Stop();
             return true;
         }
@@ -34,6 +35,13 @@ public class ResolveSiege : AgentBehaviour
                 _pastTime -= _period;
             }
 
+            if (_siege.Army.Kingdom == _siege.Village.Kingdom)
+            {
+                _siege.Village.Population = _siege.Army.Units;
+                _siege.InProgress = false;
+                _siege.Army.Remove();
+                _siege.Remove();
+            }
             if (_siege.Army.Units > 0 && _siege.Village.Population <= 0)
             {
                 _siege.Village.Population = _siege.Army.Units;
@@ -44,10 +52,17 @@ public class ResolveSiege : AgentBehaviour
                 _siege.Village.Kingdom = _siege.Army.Kingdom; // Move to AddPossessedAgent ?
 
                 _siege.InProgress = false;
+                
+                _siege.Army.Remove();
+                _siege.Remove();
+                
                 this.Stop();
             }
             else if (_siege.Army.Units <= 0)
             {
+                _siege.Army.Remove();
+                _siege.Remove();
+
                 _siege.InProgress = false;
                 this.Stop();
             }

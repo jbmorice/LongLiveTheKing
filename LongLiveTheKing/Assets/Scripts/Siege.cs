@@ -17,14 +17,20 @@ public class Siege : Agent
         Controller.AddAgentBehaviour(resolveSiege);
     }
 
+    public void Remove()
+    {
+        GameManager.Sieges.Remove(this);
+        Destroy(gameObject);
+    }
+
     void Update()
     {
-        if (!InProgress)
+/*        if (!InProgress)
         {
             GameManager.Armies.Remove(Army);
             GameManager.Sieges.Remove(this);
             Destroy(Army.gameObject);
             Destroy(gameObject);
-        }
+        }*/
     }
 }

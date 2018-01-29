@@ -30,7 +30,7 @@ public class GoTo : AgentBehaviour
 
     public override void Update(float dt)
     {
-        float speed = 3;
+        float speed = 15;
 
         Vector3 start = _agent.gameObject.transform.position;
         Vector3 end = _path[_position].gameObject.transform.position;

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using System.Collections.Generic;
 
 public class Army : MovingAgent
@@ -34,7 +35,7 @@ public class Army : MovingAgent
 
             if (collidedVillage.Kingdom == Kingdom)
             {
-                //Debug.Log("J'ai rencontré un village allié !");
+                Debug.Log("J'ai rencontré un village allié !");
 
                 collidedVillage.Population += Units;
                 GameManager.Armies.Remove(this);
@@ -42,13 +43,15 @@ public class Army : MovingAgent
             }
             else
             {
-                //Debug.Log("J'ai rencontré un village ennemi !");
-                //Controller.GetAgentBehaviour<GoTo>().Stop();
-                GameObject obj = Instantiate(SiegePrefab, transform);
-                obj.transform.position = (transform.position + collidedVillage.transform.position) / 2;
-                Siege siege = obj.GetComponent<Siege>();
-                siege.Init(GameManager, this, collidedVillage);
-                GameManager.Sieges.Add(siege);
+                if (!collidedVillage.IsUnderSiegeWith(this))
+                {
+                    Debug.Log("J'ai rencontré un village ennemi !");
+                    //Controller.GetAgentBehaviour<GoTo>().Stop();
+                    GameObject obj = Instantiate(SiegePrefab, transform);
+                    obj.transform.position = (transform.position + collidedVillage.transform.position) / 2;
+                    Siege siege = obj.GetComponent<Siege>();
+                    siege.Init(GameManager, this, collidedVillage);
+                }
             }
         }
         else if (village && village == Path[CurrentDestination])
@@ -57,14 +60,34 @@ public class Army : MovingAgent
 
             if (collidedVillage.Kingdom == Kingdom)
             {
-                //Debug.Log("J'ai rencontré un village allié !");
+                Debug.Log("J'ai rencontré un village allié !");
 
                 CurrentDestination++;
                 Controller.GetAgentBehaviour<GoTo>().Stop();
 
                 Vector3 vector = Path[CurrentDestination].transform.position - Path[CurrentDestination - 1].transform.position;
                 vector = vector.normalized;
-                transform.position = Path[CurrentDestination - 1].transform.position + Path[CurrentDestination - 1].GetComponent<CapsuleCollider>().radius * vector;
+
+                double angle;
+                if (vector[2] <= 0 && vector[0] <= 0)
+                {
+                    angle = (Math.Acos(vector[0]) * 180 / Math.PI) + 180;
+                }
+                else if (vector[2] <= 0 && vector[0] > 0)
+                {
+                    angle = (Math.Acos(vector[0]) * 180 / Math.PI) + 180;
+                }
+                else if (vector[2] > 0 && vector[0] <= 0)
+                {
+                    angle = -(Math.Acos(vector[0]) * 180 / Math.PI) + 180;
+                }
+                else
+                {
+                    angle = -(Math.Acos(vector[0]) * 180 / Math.PI) + 180;
+                }
+
+                transform.position = Path[CurrentDestination - 1].transform.position + Path[CurrentDestination - 1].GetComponent<SphereCollider>().radius * vector;
+                transform.eulerAngles = new Vector3(0.0f, (float)angle, 0.0f);
 
                 GoTo goTo = new GoTo();
                 goTo.Start(this, Path[CurrentDestination - 1], Path[CurrentDestination]);
@@ -72,13 +95,12 @@ public class Army : MovingAgent
             }
             else
             {
-                //Debug.Log("J'ai rencontré un village ennemi !");
+                Debug.Log("J'ai rencontré un village ennemi !");
                 //Controller.GetAgentBehaviour<GoTo>().Stop();
                 GameObject obj = Instantiate(SiegePrefab, transform);
                 obj.transform.position = (transform.position + collidedVillage.transform.position) / 2;
                 Siege siege = obj.GetComponent<Siege>();
                 siege.Init(GameManager, this, collidedVillage);
-                GameManager.Sieges.Add(siege);
             }
         }
 
@@ -137,6 +159,12 @@ public class Army : MovingAgent
         return false;
     }
 
+    public void Remove()
+    {
+        GameManager.Armies.Remove(this);
+        Destroy(gameObject);
+    }
+
     // Use this for initialization
     void Start()
     {
@@ -146,6 +174,6 @@ public class Army : MovingAgent
     // Update is called once per frame
     void Update()
     {
-        this.gameObject.transform.GetChild(0).GetComponent<MeshRenderer>().material.color = Kingdom.Material.color;
+        //this.gameObject.transform.GetChild(0).GetComponent<MeshRenderer>().material.color = Kingdom.Material.color;
     }
 }

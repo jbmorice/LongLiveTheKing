@@ -89,8 +89,28 @@ public class Village : Agent
         Vector3 vector = path[1].transform.position - transform.position;
         vector = vector.normalized;
 
+        double angle;
+        if (vector[2] <= 0 && vector[0] <= 0)
+        {
+            angle = (Math.Acos(vector[0]) * 180 / Math.PI) + 180;
+        }
+        else if (vector[2] <= 0 && vector[0] > 0)
+        {
+            angle = (Math.Acos(vector[0]) * 180 / Math.PI) + 180;
+        }
+        else if (vector[2] > 0 && vector[0] <= 0)
+        {
+            angle = -(Math.Acos(vector[0]) * 180 / Math.PI) + 180;
+        }
+        else
+        {
+            angle = -(Math.Acos(vector[0]) * 180 / Math.PI) + 180;
+        }
+
         GameObject obj = Instantiate(Kingdom.ArmyPrefab, transform);
-        obj.transform.position = transform.position + (GetComponent<CapsuleCollider>().radius) * vector;
+        obj.transform.position = transform.position + (GetComponent<SphereCollider>().radius) * vector;
+        obj.transform.eulerAngles = new Vector3(0.0f, (float)angle, 0.0f);
+
         Army army = obj.GetComponent<Army>();
 
         int oldPopulation = Population;
@@ -98,8 +118,6 @@ public class Village : Agent
 
         army.Init(GameManager, Kingdom, newPopulation, this, path );
         Population = oldPopulation - newPopulation;
-
-        //army.Path = aStar(this, destinationVillage);
 
         return army;
     }
@@ -190,6 +208,15 @@ public class Village : Agent
         return false;
     }
 
+    public bool IsUnderSiegeWith(Army army)
+    {
+        foreach (Siege siege in GameManager.Sieges)
+        {
+            if (this == siege.Village && army == siege.Army) return true;
+        }
+        return false;
+    }
+
     void Start()
     {
 
@@ -230,7 +257,7 @@ public class Village : Agent
 
             IsPopulationIncreasing = false;
         }
-        else if(!IsPopulationIncreasing && Population < MaxPopulation)
+        else if(!IsPopulationIncreasing && Population < MaxPopulation && !IsUnderSiege())
         {
             Controller.GetAgentBehaviour<PopulationDiminution>().Pause();
 
