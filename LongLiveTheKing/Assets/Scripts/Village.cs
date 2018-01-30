@@ -50,7 +50,7 @@ public class Village : Agent
         return false;
     }
 
-    List<Village> Neighbours()
+    public List<Village> Neighbours()
     {
         List<Village> neighbours = new List<Village>();
         foreach (Road road in NeighbouringRoads)
@@ -85,8 +85,6 @@ public class Village : Agent
 
     public Army SendArmy(Village destinationVillage)
     {
-
-
         if (this == destinationVillage) return null;
         if (Population < 2) return null;
         //if (!IsNeighbour(destinationVillage)) return null;
@@ -248,6 +246,10 @@ public class Village : Agent
                 {
                     populationProduction.Pause();
                 }
+                foreach (KingBoost kingBoost in Controller.GetAgentBehaviours<KingBoost>())
+                {
+                    kingBoost.Pause();
+                }
                 IsPopulationIncreasing = false;
             }
             else
@@ -263,7 +265,10 @@ public class Village : Agent
             {
                 populationProduction.Pause();
             }
-
+            foreach (KingBoost kingBoost in Controller.GetAgentBehaviours<KingBoost>())
+            {
+                kingBoost.Pause();
+            }
             IsPopulationIncreasing = false;
         }
         else if(!IsPopulationIncreasing && Population < MaxPopulation && !IsUnderSiege())
@@ -273,6 +278,10 @@ public class Village : Agent
             foreach (PopulationProduction populationProduction in Controller.GetAgentBehaviours<PopulationProduction>())
             {
                 populationProduction.Resume();
+            }
+            foreach (KingBoost kingBoost in Controller.GetAgentBehaviours<KingBoost>())
+            {
+                kingBoost.Resume();
             }
             IsPopulationIncreasing = true;
         }

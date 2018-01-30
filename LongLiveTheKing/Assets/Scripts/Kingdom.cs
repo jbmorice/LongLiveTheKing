@@ -8,6 +8,7 @@ public class Kingdom : Agent
     public int Gold = 0;
     public List<Agent> PossessedAgents;
     public GameObject ArmyPrefab;
+    public GameObject KingPrefab;
     public bool IA;
 
     public void Init(GameManager gameManager)
@@ -16,6 +17,13 @@ public class Kingdom : Agent
         PossessedAgents = new List<Agent>();
         GameManager.Kingdoms.Add(this);
         Debug.Log("I am a kingdom named " + Name + " !");
+    }
+
+    public void InitKing()
+    {
+        GameObject obj = Instantiate(KingPrefab, transform);
+        King king = obj.GetComponent<King>();
+        king.Init(GameManager, this);
     }
 
     public bool AddPossessedAgent(Agent agent)

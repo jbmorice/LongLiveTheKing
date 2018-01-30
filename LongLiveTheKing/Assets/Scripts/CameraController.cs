@@ -17,22 +17,18 @@ public class CameraController : MonoBehaviour
 	    Vector3 pos = transform.position;
 	    if (Input.GetKey("z") || Input.GetKey(KeyCode.UpArrow) || Input.mousePosition.y >= Screen.height - PanBorderThickness)
 	    {
-	        Debug.Log("Camera go up");
 	        pos.z += PanSpeed * Time.deltaTime;
 	    }
 	    if (Input.GetKey("s") || Input.GetKey(KeyCode.DownArrow) || Input.mousePosition.y <= PanBorderThickness)
 	    {
-	        Debug.Log("Camera go down");
 	        pos.z -= PanSpeed * Time.deltaTime;
 	    }
 	    if (Input.GetKey("d") || Input.GetKey(KeyCode.RightArrow) || Input.mousePosition.x >= Screen.width - PanBorderThickness)
 	    {
-	        Debug.Log("Camera go right");
 	        pos.x += PanSpeed * Time.deltaTime;
 	    }
 	    if (Input.GetKey("q") || Input.GetKey(KeyCode.LeftArrow) || Input.mousePosition.x <= PanBorderThickness)
 	    {
-	        Debug.Log("Camera go left");
 	        pos.x -= PanSpeed * Time.deltaTime;
 	    }
 

@@ -16,6 +16,10 @@ public class ResolveSiege : AgentBehaviour
             {
                 behaviour.Pause();
             }
+            foreach (KingBoost behaviour in _siege.Village.Controller.GetAgentBehaviours<KingBoost>())
+            {
+                behaviour.Pause();
+            }
 
             _siege.Army.Controller.GetAgentBehaviour<GoTo>().Stop();
             return true;
@@ -76,6 +80,10 @@ public class ResolveSiege : AgentBehaviour
         if (base.Stop())
         {
             foreach (PopulationProduction behaviour in _siege.Village.Controller.GetAgentBehaviours<PopulationProduction>())
+            {
+                behaviour.Resume();
+            }
+            foreach (KingBoost behaviour in _siege.Village.Controller.GetAgentBehaviours<KingBoost>())
             {
                 behaviour.Resume();
             }

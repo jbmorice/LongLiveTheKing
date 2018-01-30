@@ -5,12 +5,17 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    private bool _clickHold = false;
-    private Village _sourceVillage = null;
-    private Village _destinationVillage = null;
+    private bool _clickHoldArmy = false;
+    private Village _sourceVillageArmy = null;
+    private Village _destinationVillageArmy = null;
+
+    private bool _clickHoldKing = false;
+    private Village _sourceVillageKing = null;
+    private Village _destinationVillageKing = null;
 
     public List<Kingdom> Kingdoms;
     public List<Village> Villages;
+    public List<King> Kings;
     public List<Road> Roads;
     public List<Army> Armies;
     public List<Battle> Battles;
@@ -38,6 +43,14 @@ public class GameManager : MonoBehaviour
             village.Init(this, village.Kingdom);
         }
 
+        foreach (Kingdom kingdom in Kingdoms)
+        {
+            if (kingdom.KingPrefab != null)
+            {
+                kingdom.InitKing();
+            }
+        }
+
         Object[] roads = GameObject.FindObjectsOfType(typeof(Road));
 
         foreach (Object obj in roads)
@@ -54,6 +67,7 @@ public class GameManager : MonoBehaviour
     {
         Kingdoms = new List<Kingdom>();
         Villages = new List<Village>();
+        Kings = new List<King>();
         Roads = new List<Road>();
         Armies = new List<Army>();
         Sieges = new List<Siege>();
@@ -68,7 +82,12 @@ public class GameManager : MonoBehaviour
         {
             kingdom.Controller.Update(Time.deltaTime);
         }
-        
+
+        foreach (King king in Kings)
+        {
+            king.Controller.Update(Time.deltaTime);
+        }
+
         foreach (Village village in Villages)
         {
             village.Controller.Update(Time.deltaTime);
@@ -104,29 +123,72 @@ public class GameManager : MonoBehaviour
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit))
             {
-                _sourceVillage = hit.transform.gameObject.GetComponent<Village>();
-                if (_sourceVillage == null || !_sourceVillage.Kingdom.Equals(Player) || _sourceVillage.IsUnderSiege()) return;
+                _sourceVillageArmy = hit.transform.gameObject.GetComponent<Village>();
+                if (_sourceVillageArmy == null || !_sourceVillageArmy.Kingdom.Equals(Player) || _sourceVillageArmy.IsUnderSiege()) return;
                 Debug.Log("Hey j'appuie sur un de mes villages");
-                _clickHold = true;
+                _clickHoldArmy = true;
             }
         }
 
-        if (Input.GetMouseButtonUp(0) && _sourceVillage != null && _clickHold)
+        if (Input.GetMouseButtonUp(0) && _sourceVillageArmy != null && _clickHoldArmy)
         {
-            _clickHold = false;
+            _clickHoldArmy = false;
             var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit))
             {
-                _destinationVillage = hit.transform.gameObject.GetComponent<Village>();
-                if (_destinationVillage == null) return;
+                _destinationVillageArmy = hit.transform.gameObject.GetComponent<Village>();
+                if (_destinationVillageArmy == null) return;
             }
 
-            _sourceVillage.SendArmy(_destinationVillage);
+            _sourceVillageArmy.SendArmy(_destinationVillageArmy);
 
             // Reset attributes
-            _sourceVillage = null;
-            _destinationVillage = null;
+            _sourceVillageArmy = null;
+            _destinationVillageArmy = null;
+        }
+    }
+
+    void MoveKing()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+            if (Physics.Raycast(ray, out hit))
+            {
+                _sourceVillageKing = hit.transform.gameObject.GetComponentInParent<King>().StayingVillage;
+                if (_sourceVillageKing == null || !_sourceVillageKing.Kingdom.Equals(Player)) return;
+                Debug.Log("Hey j'appuie sur un de mes villages");
+                _clickHoldKing = true;
+            }
+        }
+
+        if (Input.GetMouseButtonUp(0) && _sourceVillageKing != null && _clickHoldKing)
+        {
+            _clickHoldKing = false;
+            var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+            if (Physics.Raycast(ray, out hit))
+            {
+                _destinationVillageKing = hit.transform.gameObject.GetComponent<Village>();
+                if (_destinationVillageKing == null || !_sourceVillageKing.Kingdom.Equals(Player)) return;
+            }
+
+            King king = null;
+            foreach (Agent agent in Player.PossessedAgents)
+            {
+                if (agent.GetType() == typeof(King))
+                {
+                    king = (King)agent;
+                    break;
+                }
+            }
+            king.Move(_sourceVillageKing,_destinationVillageKing);
+
+            // Reset attributes
+            _sourceVillageKing = null;
+            _destinationVillageKing = null;
         }
 
     }
@@ -135,5 +197,6 @@ public class GameManager : MonoBehaviour
     {
         UpdateAgentBehaviours();
         MoveArmy();
+        MoveKing();
     }
 }

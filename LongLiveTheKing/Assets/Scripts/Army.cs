@@ -35,7 +35,7 @@ public class Army : MovingAgent
 
             if (collidedVillage.Kingdom == Kingdom)
             {
-                Debug.Log("J'ai rencontré un village allié !");
+                //Debug.Log("J'ai rencontré un village allié !");
 
                 collidedVillage.Population += Units;
                 GameManager.Armies.Remove(this);
@@ -45,7 +45,7 @@ public class Army : MovingAgent
             {
                 if (!collidedVillage.IsUnderSiegeWith(this))
                 {
-                    Debug.Log("J'ai rencontré un village ennemi !");
+                    //Debug.Log("J'ai rencontré un village ennemi !");
                     //Controller.GetAgentBehaviour<GoTo>().Stop();
                     GameObject obj = Instantiate(SiegePrefab, transform);
                     obj.transform.position = (transform.position + collidedVillage.transform.position) / 2;
@@ -60,7 +60,7 @@ public class Army : MovingAgent
 
             if (collidedVillage.Kingdom == Kingdom)
             {
-                Debug.Log("J'ai rencontré un village allié !");
+                //Debug.Log("J'ai rencontré un village allié !");
 
                 CurrentDestination++;
                 Controller.GetAgentBehaviour<GoTo>().Stop();
@@ -95,7 +95,7 @@ public class Army : MovingAgent
             }
             else
             {
-                Debug.Log("J'ai rencontré un village ennemi !");
+                //Debug.Log("J'ai rencontré un village ennemi !");
                 //Controller.GetAgentBehaviour<GoTo>().Stop();
                 GameObject obj = Instantiate(SiegePrefab, transform);
                 obj.transform.position = (transform.position + collidedVillage.transform.position) / 2;
