@@ -157,7 +157,11 @@ public class GameManager : MonoBehaviour
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit))
             {
-                _sourceVillageKing = hit.transform.gameObject.GetComponentInParent<King>().StayingVillage;
+                King king = hit.transform.gameObject.GetComponentInParent<King>();
+                if (king == null) return;
+
+                _sourceVillageKing = king.StayingVillage;
+
                 if (_sourceVillageKing == null || !_sourceVillageKing.Kingdom.Equals(Player)) return;
                 Debug.Log("Hey j'appuie sur un de mes villages");
                 _clickHoldKing = true;

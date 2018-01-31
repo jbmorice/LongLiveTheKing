@@ -28,10 +28,6 @@ public class King : MovingAgent {
 
                 InstantiateStayingGameObject(StayingVillage);
 
-                KingBoost kingBoost = new KingBoost();
-                kingBoost.Start(StayingVillage);
-                StayingVillage.Controller.AddAgentBehaviour(kingBoost);
-
                 break;
             }
         }
@@ -44,6 +40,10 @@ public class King : MovingAgent {
         gameObject.transform.position = StayingVillage.transform.position;
         CurrentGameObject = Instantiate(StayingGameObject, gameObject.transform);
         CurrentGameObject.transform.position = new Vector3(village.transform.position.x, village.transform.position.y + 20, village.transform.position.z);
+
+        KingBoost kingBoost = new KingBoost();
+        kingBoost.Start(village);
+        village.Controller.AddAgentBehaviour(kingBoost);
     }
 
     public void InstantiateMovingGameObject(Village source, Village destination)
@@ -93,6 +93,7 @@ public class King : MovingAgent {
                 StayingVillage = collidedVillage;
                 CurrentDestination = 1;
                 Destroy(gameObject.GetComponent<SphereCollider>());
+                Destroy(gameObject.GetComponent<Rigidbody>());
                 InstantiateStayingGameObject(collidedVillage);
             }
             else
@@ -176,6 +177,10 @@ public class King : MovingAgent {
         gameObject.AddComponent<SphereCollider>();
         gameObject.GetComponent<SphereCollider>().radius = 10;
         gameObject.GetComponent<SphereCollider>().center = new Vector3(0,5,0);
+        gameObject.GetComponent<SphereCollider>().isTrigger = true;
+
+        gameObject.AddComponent<Rigidbody>();
+        gameObject.GetComponent<Rigidbody>().isKinematic = true;
         StayingVillage = null;
     }
 
