@@ -86,6 +86,7 @@ public class GameManager : MonoBehaviour
         foreach (King king in Kings)
         {
             king.Controller.Update(Time.deltaTime);
+            //if(king.Kingdom == Player) Debug.Log(king.Controller.GetAgentBehaviours<GoTo>().Count);
         }
 
         foreach (Village village in Villages)
