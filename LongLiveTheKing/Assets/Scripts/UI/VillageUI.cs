@@ -22,7 +22,6 @@ public class VillageUI : MonoBehaviour
     {
 	    Vector3 screenPosition = Camera.main.WorldToScreenPoint(Village.transform.position);
         screenPosition.z = 0.0f;
-        //screenPosition.x -= 50;
         screenPosition.y += 55;
         transform.position = screenPosition;
 

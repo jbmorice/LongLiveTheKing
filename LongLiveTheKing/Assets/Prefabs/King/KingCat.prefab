@@ -54,7 +54,7 @@ MonoBehaviour:
   Kingdom: {fileID: 0}
   MovingGameObject: {fileID: 1136071179190754, guid: 83045937336416b4d890ced5cbd76bef,
     type: 2}
-  StayingGameObject: {fileID: 1615903516666976, guid: 38689ecad039506458c378cf87643830,
+  StayingGameObject: {fileID: 1154566089331062, guid: 76af439f775175c458e4805d25e962bb,
     type: 2}
   CurrentGameObject: {fileID: 0}
   Path: []
