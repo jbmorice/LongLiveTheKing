@@ -24,9 +24,7 @@ public class King : MovingAgent {
         {
             if (agent.GetType() == typeof(Village))
             {
-                StayingVillage = (Village) agent;
-
-                InstantiateStayingGameObject(StayingVillage);
+                InstantiateStayingGameObject((Village) agent);
 
                 break;
             }
@@ -36,8 +34,12 @@ public class King : MovingAgent {
     public void InstantiateStayingGameObject(Village village)
     {
         if(CurrentGameObject != null) Destroy(CurrentGameObject);
+        if (gameObject.GetComponent<SphereCollider>() != null) Destroy(gameObject.GetComponent<SphereCollider>());
+        if (gameObject.GetComponent<Rigidbody>() != null) Destroy(gameObject.GetComponent<Rigidbody>());
 
-        gameObject.transform.position = StayingVillage.transform.position;
+        StayingVillage = village;
+
+        gameObject.transform.position = village.transform.position;
         CurrentGameObject = Instantiate(StayingGameObject, gameObject.transform);
         CurrentGameObject.transform.position = new Vector3(village.transform.position.x, village.transform.position.y + 20, village.transform.position.z);
 
@@ -49,7 +51,6 @@ public class King : MovingAgent {
     public void InstantiateMovingGameObject(Village source, Village destination)
     {
         if (CurrentGameObject != null) Destroy(CurrentGameObject);
-
 
         CurrentGameObject = Instantiate(MovingGameObject, transform);
 
@@ -92,8 +93,8 @@ public class King : MovingAgent {
                 Path.Clear();
                 StayingVillage = collidedVillage;
                 CurrentDestination = 1;
-                Destroy(gameObject.GetComponent<SphereCollider>());
-                Destroy(gameObject.GetComponent<Rigidbody>());
+                Controller.GetAgentBehaviour<GoTo>().Stop();
+
                 InstantiateStayingGameObject(collidedVillage);
             }
             else
@@ -170,9 +171,11 @@ public class King : MovingAgent {
 
         StayingVillage.Controller.GetAgentBehaviour<KingBoost>().Stop();
 
+        Debug.Log("Je veux aller vers " + Path[1]);
         GoTo goTo = new GoTo(); ;
-        goTo.Start(this, StayingVillage, Path[1]);
+        goTo.Start(this, Path[0], Path[1]);
         Controller.AddAgentBehaviour(goTo);
+        Debug.Log("I added the goto behaviour");
 
         gameObject.AddComponent<SphereCollider>();
         gameObject.GetComponent<SphereCollider>().radius = 10;
