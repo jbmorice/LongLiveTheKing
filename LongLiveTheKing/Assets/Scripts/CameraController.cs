@@ -12,6 +12,8 @@ public class CameraController : MonoBehaviour
 
     public float ScrollSpeed = 20f;
 
+    private Vector3 TargetPosition = Vector3.zero;
+
     void Update ()
 	{
 	    Vector3 pos = transform.position;
@@ -39,6 +41,8 @@ public class CameraController : MonoBehaviour
 	    pos.z = Mathf.Clamp(pos.z, -PanLimit.z, PanLimit.z);
         pos.y = Mathf.Clamp(pos.y, 130, PanLimit.y);
 
-        transform.position = pos;
+	    TargetPosition = pos;
+
+        transform.position = Vector3.Lerp(transform.position, TargetPosition, 2.0f * Time.deltaTime);
 	}
 }

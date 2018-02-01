@@ -8423,10 +8423,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1457f2bda96496c42817a51383fee7c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PanSpeed: 40
+  PanSpeed: 200
   PanBorderThickness: 10
   PanLimit: {x: 225, y: 350, z: 225}
-  ScrollSpeed: 20
+  ScrollSpeed: 15
 --- !u!81 &587421889
 AudioListener:
   m_ObjectHideFlags: 0
@@ -23525,7 +23525,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1730285154}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 504.5, y: 215, z: 0}
+  m_LocalPosition: {x: 448, y: 211.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
