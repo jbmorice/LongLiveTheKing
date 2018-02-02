@@ -76,6 +76,7 @@ public class GameManager : MonoBehaviour
         Init();
     }
 
+    // #FIXME: Find a solution to modifying structures while iterating on it (separate list for agents to destroy after all updates)
     void UpdateAgentBehaviours()
     {
         foreach (Kingdom kingdom in Kingdoms)
