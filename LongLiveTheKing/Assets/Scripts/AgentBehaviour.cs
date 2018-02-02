@@ -33,7 +33,7 @@ public abstract class AgentBehaviour
 
     public bool Start()
     {
-        if (_state == State.Stopped)
+        if (_state == State.Stopped )
         {
             _state = State.Running;
             return true;
@@ -44,7 +44,7 @@ public abstract class AgentBehaviour
 
     public bool Stop()
     {
-        if (_state == State.Running)
+        if (_state == State.Running || _state == State.Paused)
         {
             _state = State.Stopped;
             return true;

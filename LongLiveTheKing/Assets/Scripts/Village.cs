@@ -240,6 +240,55 @@ public class Village : Agent
 
         if (Population == MaxPopulation)
         {
+            foreach (PopulationProduction populationProduction in Controller.GetAgentBehaviours<PopulationProduction>())
+            {
+                populationProduction.Pause();
+            }
+            foreach (KingBoost kingBoost in Controller.GetAgentBehaviours<KingBoost>())
+            {
+                kingBoost.Pause();
+            }
+            IsPopulationIncreasing = false;
+
+            Controller.GetAgentBehaviour<PopulationDiminution>().Pause();
+        }
+        else if (Population > MaxPopulation)
+        {
+            Controller.GetAgentBehaviour<PopulationDiminution>().Resume();
+
+            foreach (PopulationProduction populationProduction in Controller.GetAgentBehaviours<PopulationProduction>())
+            {
+                populationProduction.Pause();
+            }
+            foreach (KingBoost kingBoost in Controller.GetAgentBehaviours<KingBoost>())
+            {
+                kingBoost.Pause();
+            }
+            IsPopulationIncreasing = false;
+        }
+        else if(Population < MaxPopulation && !IsUnderSiege())
+        {
+            Controller.GetAgentBehaviour<PopulationDiminution>().Pause();
+
+            foreach (PopulationProduction populationProduction in Controller.GetAgentBehaviours<PopulationProduction>())
+            {
+                populationProduction.Resume();
+            }
+            foreach (KingBoost kingBoost in Controller.GetAgentBehaviours<KingBoost>())
+            {
+                kingBoost.Resume();
+            }
+            IsPopulationIncreasing = true;
+        }
+    }
+/*
+    void Update()
+    {
+        UpdateUI();
+        UpdateKingdom();
+
+        if (Population == MaxPopulation)
+        {
             if (IsPopulationIncreasing)
             {
                 foreach (PopulationProduction populationProduction in Controller.GetAgentBehaviours<PopulationProduction>())
@@ -271,7 +320,7 @@ public class Village : Agent
             }
             IsPopulationIncreasing = false;
         }
-        else if(!IsPopulationIncreasing && Population < MaxPopulation && !IsUnderSiege())
+        else if (!IsPopulationIncreasing && Population < MaxPopulation && !IsUnderSiege())
         {
             Controller.GetAgentBehaviour<PopulationDiminution>().Pause();
 
@@ -285,6 +334,6 @@ public class Village : Agent
             }
             IsPopulationIncreasing = true;
         }
-    }
+    }*/
 
 }
