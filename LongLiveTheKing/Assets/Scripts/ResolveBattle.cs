@@ -1,7 +1,7 @@
 ﻿public class ResolveBattle : AgentBehaviour
 {
     private Battle _battle;
-    private float _period = 0.1f;
+    private float _period = 0.02f;
     private float _pastTime = 0.0f;
     private int _decrement = 1;
 

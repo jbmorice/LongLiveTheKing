@@ -3,7 +3,7 @@
 public class ResolveSiege : AgentBehaviour
 {
     private Siege _siege;
-    private float _period = 0.2f;
+    private float _period = 0.05f;
     private float _pastTime = 0.0f;
     private int _decrement = 1;
 
