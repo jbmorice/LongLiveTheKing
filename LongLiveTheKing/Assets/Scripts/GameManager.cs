@@ -132,7 +132,6 @@ public class GameManager : MonoBehaviour
             {
                 _sourceVillageArmy = hit.transform.gameObject.GetComponent<Village>();
                 if (_sourceVillageArmy == null || !_sourceVillageArmy.Kingdom.Equals(Player) || _sourceVillageArmy.IsUnderSiege()) return;
-                Debug.Log("Hey j'appuie sur un de mes villages");
                 _clickHoldArmy = true;
             }
         }
@@ -170,7 +169,6 @@ public class GameManager : MonoBehaviour
                 _sourceVillageKing = king.StayingVillage;
 
                 if (_sourceVillageKing == null || !_sourceVillageKing.Kingdom.Equals(Player)) return;
-                Debug.Log("Hey j'appuie sur un de mes villages");
                 _clickHoldKing = true;
             }
         }
@@ -210,6 +208,7 @@ public class GameManager : MonoBehaviour
         {
             if (king.StayingVillage != null && king.Kingdom != king.StayingVillage.Kingdom)
             {
+                Debug.Log("I try to remove king " + king.Kingdom.Name);
                 king.Remove();
             }
         }
@@ -223,6 +222,7 @@ public class GameManager : MonoBehaviour
             if (king.Kingdom == Player) tempKing = king;
         }
 
+        Debug.Log(Kings.Count);
         if (tempKing == null)
         {
             GameObject temp = Instantiate(DefeatUI, transform);

@@ -168,7 +168,7 @@ public class King : MovingAgent {
         }
 
         if (CurrentGameObject != null) Destroy(CurrentGameObject);
-
+        GameManager.Kings.Remove(this);
         Destroy(this);
     }
 
