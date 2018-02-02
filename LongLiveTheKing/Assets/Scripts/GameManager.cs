@@ -230,8 +230,7 @@ public class GameManager : MonoBehaviour
             GameInProgress = false;
             Debug.Log("Game Over");
         }
-
-        if (Kings.Count == 1 && tempKing != null)
+        else if (Kings.Count == 1)
         {
             GameObject temp = Instantiate(VictoryUI, transform);
             temp.transform.SetParent(GameObject.Find("UICanvas").transform, true);
@@ -242,13 +241,13 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        //if (GameInProgress)
+        if (GameInProgress)
         {
-            //UpdateKing();
-            //CheckVictory();
             UpdateAgentBehaviours();
             MoveArmy();
             MoveKing();
+            UpdateKing();
+            CheckVictory();
         }
         
     }

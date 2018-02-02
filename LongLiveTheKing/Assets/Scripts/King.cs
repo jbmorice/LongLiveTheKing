@@ -167,6 +167,8 @@ public class King : MovingAgent {
             StayingVillage.Controller.GetAgentBehaviour<KingBoost>().Stop();
         }
 
+        if (CurrentGameObject != null) Destroy(CurrentGameObject);
+
         Destroy(this);
     }
 
