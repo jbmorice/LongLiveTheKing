@@ -8405,6 +8405,7 @@ GameObject:
   - component: {fileID: 587421890}
   - component: {fileID: 587421889}
   - component: {fileID: 587421888}
+  - component: {fileID: 587421893}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -8425,8 +8426,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PanSpeed: 1000
   PanBorderThickness: 10
-  PanLimit: {x: 225, y: 350, z: 225}
-  ScrollSpeed: 15
+  PanLimit: {x: 225, y: 450, z: 225}
+  ScrollSpeed: 100
 --- !u!81 &587421889
 AudioListener:
   m_ObjectHideFlags: 0
@@ -8483,12 +8484,92 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 587421887}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 300, z: -150}
+  m_LocalPosition: {x: 0, y: 400, z: -150}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+--- !u!82 &587421893
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 587421887}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 31208a1cf62ea4847a2bacf4a09a1be5, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 1
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!1001 &592271777
 Prefab:
   m_ObjectHideFlags: 0
@@ -8611,7 +8692,7 @@ Prefab:
         type: 2}
       propertyPath: Kingdom
       value: 
-      objectReference: {fileID: 1495354444}
+      objectReference: {fileID: 578521397}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 91e6c487a35a2af4b93bd45e6abb471c, type: 2}
   m_IsPrefabParent: 0
@@ -10891,6 +10972,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74ae97ca34fcaa649939dbd92bd2b921, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  GameInProgress: 1
+  VictoryUI: {fileID: 0}
+  DefeatUI: {fileID: 0}
   Kingdoms: []
   Villages: []
   Kings: []
@@ -20856,7 +20940,7 @@ Prefab:
         type: 2}
       propertyPath: Kingdom
       value: 
-      objectReference: {fileID: 1495354444}
+      objectReference: {fileID: 578521397}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 91e6c487a35a2af4b93bd45e6abb471c, type: 2}
   m_IsPrefabParent: 0
@@ -23525,7 +23609,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1730285154}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 448, y: 211.5, z: 0}
+  m_LocalPosition: {x: 508.5, y: 219, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

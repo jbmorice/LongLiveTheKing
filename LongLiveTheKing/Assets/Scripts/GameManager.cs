@@ -5,6 +5,11 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    public bool GameInProgress = true;
+
+    public GameObject VictoryUI;
+    public GameObject DefeatUI;
+
     private bool _clickHoldArmy = false;
     private Village _sourceVillageArmy = null;
     private Village _destinationVillageArmy = null;
@@ -220,21 +225,33 @@ public class GameManager : MonoBehaviour
 
         if (tempKing == null)
         {
+            GameObject temp = Instantiate(DefeatUI, transform);
+            temp.transform.SetParent(GameObject.Find("UICanvas").transform, true);
+            GameInProgress = false;
             Debug.Log("Game Over");
         }
 
         if (Kings.Count == 1 && tempKing != null)
         {
+            GameObject temp = Instantiate(VictoryUI, transform);
+            temp.transform.SetParent(GameObject.Find("UICanvas").transform, true);
+            GameInProgress = false;
             Debug.Log("You win");
         }
     }
 
     void Update()
     {
-        CheckVictory();
-        UpdateAgentBehaviours();
-        MoveArmy();
-        MoveKing();
-        UpdateKing();
+        //if (GameInProgress)
+        {
+            //UpdateKing();
+            //CheckVictory();
+            UpdateAgentBehaviours();
+            MoveArmy();
+            MoveKing();
+        }
+        
     }
+
+
 }
