@@ -23,7 +23,12 @@ public class VillageUI : MonoBehaviour
         screenPosition.y += 55;
         transform.position = screenPosition;
 
-	    transform.Find("Population").GetComponent<TextMeshProUGUI>().text = Village.Population.ToString();
+        GameObject backgroundPanel = transform.Find("Background").gameObject;
+        if (backgroundPanel)
+        {
+            backgroundPanel.GetComponent<Image>().color = Village.Kingdom.Material.color;
+        }
+        transform.Find("Population").GetComponent<TextMeshProUGUI>().text = Village.Population.ToString();
         transform.Find("MaxPopulation").GetComponent<TextMeshProUGUI>().text = Village.MaxPopulation.ToString();
     }
 }
