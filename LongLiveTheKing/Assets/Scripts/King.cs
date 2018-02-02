@@ -75,7 +75,6 @@ public class King : MovingAgent {
             angle = -(Math.Acos(vector[0]) * 180 / Math.PI) + 180;
         }
 
-        //CurrentGameObject.transform.position = source.transform.position + (source.GetComponent<SphereCollider>().radius) * vector;
         gameObject.transform.position = source.transform.position + (source.GetComponent<SphereCollider>().radius) * vector;
         CurrentGameObject.transform.eulerAngles = new Vector3(0.0f, (float)angle, 0.0f);
     }

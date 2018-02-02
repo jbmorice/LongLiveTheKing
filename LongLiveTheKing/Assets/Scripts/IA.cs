@@ -1,13 +1,14 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class IA : MonoBehaviour
 {
     private float _elapsedTimeAttack = 0.0f;
-    private float _periodAttack = 15.0f;
+    private float _periodAttack = 5.0f;
     private float _elapsedTimeDefence = 5.0f;
-    private float _periodDefence = 10.0f;
+    private float _periodDefence = 5.0f;
 
 
     public GameManager GameManager { get; private set; }
@@ -26,15 +27,19 @@ public class IA : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        foreach (Kingdom kingdom in GameManager.Kingdoms)
+        if(GameManager.GameInProgress)
         {
-            if (kingdom.IA)
+            foreach (Kingdom kingdom in GameManager.Kingdoms)
             {
-                if (!DefendVillages(kingdom, Time.deltaTime))
+                if (kingdom.IA)
                 {
-                    Attack(kingdom, Time.deltaTime);
+                    ReinforceBorderVillage(kingdom);
+                    if (!DefendVillages(kingdom, Time.deltaTime))
+                    {
+                        Attack(kingdom, Time.deltaTime);
+                    }
                 }
-            }
+            }   
         }
     }
 
@@ -50,65 +55,7 @@ public class IA : MonoBehaviour
         return villages;
     }
 
-    bool DefendVillages(Kingdom kingdom, float dt)
-    {
-        List<Village> villagesUnderSiege = this.VillagesUnderSiege(kingdom);
-
-        if (villagesUnderSiege.Count == 0)
-        {
-            return false;
-        }
-        else
-        {
-            _elapsedTimeDefence += dt;
-            if (_elapsedTimeDefence > _periodDefence)
-            {
-                foreach (Village village in villagesUnderSiege)
-                {
-                    Village bestVillage = null;
-                    bool first = true;
-
-                    foreach (Road currentRoad in GameManager.Roads)
-                    {
-                        if (currentRoad.FirstVillage == village && currentRoad.SecondVillage.Kingdom == kingdom)
-                        {
-                            if (first)
-                            {
-                                bestVillage = currentRoad.SecondVillage;
-                                first = false;
-                            }
-                            else
-                            {
-                                if (currentRoad.SecondVillage.Population > bestVillage.Population && !currentRoad.SecondVillage.IsUnderSiege())
-                                    bestVillage = currentRoad.SecondVillage;
-                            }
-                        }
-                        else if (currentRoad.SecondVillage == village && currentRoad.FirstVillage.Kingdom == kingdom)
-                        {
-                            if (first)
-                            {
-                                bestVillage = currentRoad.FirstVillage;
-                                first = false;
-                            }
-                            else
-                            {
-                                if (currentRoad.FirstVillage.Population > bestVillage.Population && !currentRoad.FirstVillage.IsUnderSiege())
-                                    bestVillage = currentRoad.FirstVillage;
-                            }
-                        }
-                    }
-
-                    if (bestVillage != null)
-                    {
-                        bestVillage.SendArmy(village);
-                    }
-                }
-
-                _elapsedTimeDefence -= _periodDefence;
-            }
-        }
-        return true;
-    }
+    
 
     List<Road> FindBordersRoads(Kingdom kingdom)
     {
@@ -121,6 +68,32 @@ public class IA : MonoBehaviour
         }
 
         return roads;
+    }
+
+    List<Village> FindBordersVillages(Kingdom kingdom)
+    {
+        List<Village> villages = new List<Village>();
+
+        foreach (Road road in GameManager.Roads)
+        {
+            if (road.FirstVillage.Kingdom == kingdom && road.SecondVillage.Kingdom != kingdom) villages.Add(road.FirstVillage);
+            else if (road.FirstVillage.Kingdom != kingdom && road.SecondVillage.Kingdom == kingdom) villages.Add(road.SecondVillage);
+        }
+
+        return villages;
+    }
+
+    List<Village> FindInnerVillages(Kingdom kingdom)
+    {
+        List<Village> villages = new List<Village>();
+        List<Village> bordersVillages = FindBordersVillages(kingdom);
+
+        foreach (Village village in GameManager.Villages)
+        {
+            if (!bordersVillages.Contains(village) && village.Kingdom == kingdom) villages.Add(village); ;
+        }
+
+        return villages;
     }
 
     void LaunchAttack(Kingdom kingdom)
@@ -201,6 +174,89 @@ public class IA : MonoBehaviour
             }
         }
 
+    }
+
+    void ReinforceBorderVillage(Kingdom kingdom)
+    {
+        foreach (Village village in FindInnerVillages(kingdom))
+        {
+            if (village.Population >= village.MaxPopulation)
+            {
+                Village borderVillageWithLessPopulation = null;
+                int population = Int32.MaxValue;
+                
+                foreach (Village borderVillage in FindBordersVillages(kingdom))
+                {
+                    if (population > borderVillage.Population)
+                    {
+                        borderVillageWithLessPopulation = borderVillage;
+                        population = borderVillage.Population;
+                    }
+                }
+
+                village.SendArmy(borderVillageWithLessPopulation);
+            }
+        }
+    }
+
+    bool DefendVillages(Kingdom kingdom, float dt)
+    {
+        List<Village> villagesUnderSiege = this.VillagesUnderSiege(kingdom);
+
+        if (villagesUnderSiege.Count == 0)
+        {
+            return false;
+        }
+        else
+        {
+            _elapsedTimeDefence += dt;
+            if (_elapsedTimeDefence > _periodDefence)
+            {
+                foreach (Village village in villagesUnderSiege)
+                {
+                    Village bestVillage = null;
+                    bool first = true;
+
+                    foreach (Road currentRoad in GameManager.Roads)
+                    {
+                        if (currentRoad.FirstVillage == village && currentRoad.SecondVillage.Kingdom == kingdom)
+                        {
+                            if (first)
+                            {
+                                bestVillage = currentRoad.SecondVillage;
+                                first = false;
+                            }
+                            else
+                            {
+                                if (currentRoad.SecondVillage.Population > bestVillage.Population && !currentRoad.SecondVillage.IsUnderSiege())
+                                    bestVillage = currentRoad.SecondVillage;
+                            }
+                        }
+                        else if (currentRoad.SecondVillage == village && currentRoad.FirstVillage.Kingdom == kingdom)
+                        {
+                            if (first)
+                            {
+                                bestVillage = currentRoad.FirstVillage;
+                                first = false;
+                            }
+                            else
+                            {
+                                if (currentRoad.FirstVillage.Population > bestVillage.Population && !currentRoad.FirstVillage.IsUnderSiege())
+                                    bestVillage = currentRoad.FirstVillage;
+                            }
+                        }
+                    }
+
+                    if (bestVillage != null)
+                    {
+                        bestVillage.SendArmy(village);
+                    }
+                }
+
+                _elapsedTimeDefence -= _periodDefence;
+            }
+        }
+        return true;
     }
 
     void Attack(Kingdom kingdom, float dt)

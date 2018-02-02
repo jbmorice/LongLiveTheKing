@@ -222,7 +222,6 @@ public class GameManager : MonoBehaviour
             if (king.Kingdom == Player) tempKing = king;
         }
 
-        Debug.Log(Kings.Count);
         if (tempKing == null)
         {
             GameObject temp = Instantiate(DefeatUI, transform);
