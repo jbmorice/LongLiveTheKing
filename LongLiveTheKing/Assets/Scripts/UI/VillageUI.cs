@@ -13,8 +13,6 @@ public class VillageUI : MonoBehaviour
         Village = village;
         transform.SetParent(GameObject.Find("UICanvas").transform, true); // #TDOD: Check what the boolean actually does
         name = name + " - " + Village.name;
-
-        transform.Find("MaxPopulation").GetComponent<TextMeshProUGUI>().text = Village.MaxPopulation.ToString();
     }
 	
 	// Update is called once per frame
@@ -26,5 +24,6 @@ public class VillageUI : MonoBehaviour
         transform.position = screenPosition;
 
 	    transform.Find("Population").GetComponent<TextMeshProUGUI>().text = Village.Population.ToString();
+        transform.Find("MaxPopulation").GetComponent<TextMeshProUGUI>().text = Village.MaxPopulation.ToString();
     }
 }
