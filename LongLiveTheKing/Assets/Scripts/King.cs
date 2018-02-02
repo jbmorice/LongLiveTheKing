@@ -99,6 +99,7 @@ public class King : MovingAgent {
             }
             else
             {
+                Remove();
                 Debug.Log("You loose !");
             }
         }
@@ -143,6 +144,7 @@ public class King : MovingAgent {
             }
             else
             {
+                Remove();
                 Debug.Log("You loose");
             }
         }
@@ -152,6 +154,7 @@ public class King : MovingAgent {
         {
             if (collidedArmy.Kingdom != Kingdom)
             {
+                Remove();
                 Debug.Log("You loose");
             }
         }
@@ -159,6 +162,11 @@ public class King : MovingAgent {
 
     public void Remove()
     {
+        if (StayingVillage != null)
+        {
+            StayingVillage.Controller.GetAgentBehaviour<KingBoost>().Stop();
+        }
+
         Destroy(MovingGameObject);
     }
 

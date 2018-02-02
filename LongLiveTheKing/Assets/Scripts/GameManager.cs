@@ -198,10 +198,42 @@ public class GameManager : MonoBehaviour
 
     }
 
+    public void UpdateKing()
+    {
+        foreach (King king in Kings)
+        {
+            if (king.StayingVillage != null && king.Kingdom != king.StayingVillage.Kingdom)
+            {
+                king.Remove();
+            }
+        }
+    }
+
+    public void CheckVictory()
+    {
+        King tempKing = null;
+        foreach (King king in Kings)
+        {
+            if (king.Kingdom == Player) tempKing = king;
+        }
+
+        if (tempKing == null)
+        {
+            Debug.Log("Game Over");
+        }
+
+        if (Kings.Count == 1 && tempKing != null)
+        {
+            Debug.Log("You win");
+        }
+    }
+
     void Update()
     {
+        CheckVictory();
         UpdateAgentBehaviours();
         MoveArmy();
         MoveKing();
+        UpdateKing();
     }
 }
