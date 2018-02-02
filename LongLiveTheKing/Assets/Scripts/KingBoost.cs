@@ -36,6 +36,7 @@ public class KingBoost : AgentBehaviour {
     {
         if (base.Stop())
         {
+            Debug.Log("End king boost");
             _village.MaxPopulation -= maxPopulationIncrease;
             return true;
         }

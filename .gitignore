@@ -5,6 +5,7 @@
 [Bb]uilds/
 Assets/AssetStoreTools*
 LongLiveTheKing/Assets/Scenes/DebuggingScenes*
+LongLiveTheKing/Assets/Low Poly Water/Plane Meshes* #il change tout le temps c'est chiant ...
 
 # Visual Studio 2015 cache directory
 .vs/

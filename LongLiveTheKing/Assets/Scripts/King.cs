@@ -171,11 +171,9 @@ public class King : MovingAgent {
 
         StayingVillage.Controller.GetAgentBehaviour<KingBoost>().Stop();
 
-        Debug.Log("Je veux aller vers " + Path[1]);
         GoTo goTo = new GoTo(); ;
         goTo.Start(this, Path[0], Path[1]);
         Controller.AddAgentBehaviour(goTo);
-        Debug.Log("I added the goto behaviour");
 
         gameObject.AddComponent<SphereCollider>();
         gameObject.GetComponent<SphereCollider>().radius = 10;

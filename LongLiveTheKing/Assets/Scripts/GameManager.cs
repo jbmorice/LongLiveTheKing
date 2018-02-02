@@ -177,7 +177,7 @@ public class GameManager : MonoBehaviour
             if (Physics.Raycast(ray, out hit))
             {
                 _destinationVillageKing = hit.transform.gameObject.GetComponent<Village>();
-                if (_destinationVillageKing == null || !_sourceVillageKing.Kingdom.Equals(Player)) return;
+                if (_destinationVillageKing == null || !_sourceVillageKing.Kingdom.Equals(Player) || _destinationVillageKing.Kingdom != Player) return;
             }
 
             King king = null;
