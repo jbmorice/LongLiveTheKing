@@ -40,7 +40,7 @@ namespace LLtK
                             Attack(kingdom, Time.deltaTime);
                         }
                     }
-                }   
+                }
             }
         }
 

@@ -76,19 +76,5 @@ namespace LLtK
             return null;
 
         }
-
-        void UpdateKingdom()
-        {
-            Kingdom kingdom = BelongsToKingdom();
-            if (kingdom != null)
-            {
-                this.gameObject.transform.GetChild(0).GetComponent<MeshRenderer>().material.color = kingdom.Material.color;
-            }
-        }
-
-        void Update()
-        {
-            UpdateKingdom();
-        }
     }
 }

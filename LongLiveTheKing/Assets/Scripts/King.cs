@@ -161,7 +161,7 @@ namespace LLtK
             }
         }
 
-        public void Remove()
+        public override void OnRemove()
         {
             if (StayingVillage != null)
             {
@@ -169,8 +169,7 @@ namespace LLtK
             }
 
             if (CurrentGameObject != null) Destroy(CurrentGameObject);
-            GameManager.Kings.Remove(this);
-            Destroy(this);
+            base.OnRemove();
         }
 
         public void Move(Village source, Village destination)

@@ -40,8 +40,7 @@ namespace LLtK
                     //Debug.Log("J'ai rencontré un village allié !");
 
                     collidedVillage.Population += Units;
-                    GameManager.Armies.Remove(this);
-                    Destroy(gameObject);
+                    Remove();
                 }
                 else
                 {
@@ -119,14 +118,12 @@ namespace LLtK
                         if (armyBesiege)
                         {
                             collidedArmy.Units += Units;
-                            GameManager.Armies.Remove(this);
-                            Destroy(gameObject);
+                            Remove();
                         }
                         else
                         {
                             Units += collidedArmy.Units;
-                            GameManager.Armies.Remove(collidedArmy);
-                            Destroy(collidedArmy.gameObject);
+                            collidedArmy.Remove();
                         }
                     }
                 }
@@ -159,24 +156,6 @@ namespace LLtK
                 if (battle.FirstAgent == army && battle.SecondAgent == this) return true;
             }
             return false;
-        }
-
-        public void Remove()
-        {
-            GameManager.Armies.Remove(this);
-            Destroy(gameObject);
-        }
-
-        // Use this for initialization
-        void Start()
-        {
-
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-            //this.gameObject.transform.GetChild(0).GetComponent<MeshRenderer>().material.color = Kingdom.Material.color;
         }
     }
 }

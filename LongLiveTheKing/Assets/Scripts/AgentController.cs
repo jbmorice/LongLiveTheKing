@@ -24,17 +24,12 @@ namespace LLtK
 
         public void Update(float dt)
         {
-            foreach (AgentBehaviour behaviour in _behaviours)
+            _behaviours.RemoveAll(behaviour => behaviour.Status == AgentBehaviour.State.Stopped);
+            for (int i = 0; i < _behaviours.Count; i++)
             {
-                if (behaviour.Status == AgentBehaviour.State.Running)
+                if (_behaviours[i].Status == AgentBehaviour.State.Running)
                 {
-                    behaviour.Update(dt);
-                }
-
-                // FIXME: Removing while iterating might unleash hell upon us ! (And it raises an exception...)
-                if (behaviour.Status == AgentBehaviour.State.Stopped)
-                {
-                    RemoveAgentBehaviour(behaviour);
+                    _behaviours[i].Update(dt);
                 }
             }
         }

@@ -25,17 +25,13 @@
             {
                 if (FirstHasFallen)
                 {
-                    GameManager.Armies.Remove(FirstAgent);
-                    GameManager.Battles.Remove(this);
-                    Destroy(FirstAgent.gameObject);
-                    Destroy(gameObject);
+                    FirstAgent.Remove();
+                    Remove();
                 }
                 if (SecondHasFallen)
                 {
-                    GameManager.Armies.Remove(SecondAgent);
-                    GameManager.Battles.Remove(this);
-                    Destroy(SecondAgent.gameObject);
-                    Destroy(gameObject);
+                    SecondAgent.Remove();
+                    Remove();
                 }
             }
         }

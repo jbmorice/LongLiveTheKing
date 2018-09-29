@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace LLtK
 {
@@ -35,15 +37,15 @@ namespace LLtK
 
             foreach (Object obj in kingdoms)
             {
-                Kingdom kingdom = (Kingdom) obj;
+                Kingdom kingdom = (Kingdom)obj;
                 kingdom.Init(this);
             }
-        
+
             Object[] villages = GameObject.FindObjectsOfType(typeof(Village));
 
             foreach (Object obj in villages)
             {
-                Village village = (Village) obj;
+                Village village = (Village)obj;
                 village.Init(this, village.Kingdom);
             }
 
@@ -59,7 +61,7 @@ namespace LLtK
 
             foreach (Object obj in roads)
             {
-                Road road = (Road) obj;
+                Road road = (Road)obj;
                 road.Init(this, road.FirstVillage, road.SecondVillage);
             }
 
@@ -80,45 +82,56 @@ namespace LLtK
             Init();
         }
 
-        // #FIXME: Find a solution to modifying structures while iterating on it (separate list for agents to destroy after all updates)
+        private static bool IsAgentToRemove(Agent agent)
+        {
+            if (!agent.ToRemove) return false;
+            agent.OnRemove();
+            return true;
+        }
+
         void UpdateAgentBehaviours()
         {
             foreach (Kingdom kingdom in Kingdoms)
             {
                 kingdom.Controller.Update(Time.deltaTime);
             }
+            Kingdoms.RemoveAll(IsAgentToRemove);
 
             foreach (King king in Kings)
             {
                 king.Controller.Update(Time.deltaTime);
-                //if(king.Kingdom == Player) Debug.Log(king.Controller.GetAgentBehaviours<GoTo>().Count);
             }
+            Kings.RemoveAll(IsAgentToRemove);
 
             foreach (Village village in Villages)
             {
                 village.Controller.Update(Time.deltaTime);
             }
-        
+            Villages.RemoveAll(IsAgentToRemove);
+
             foreach (Road road in Roads)
             {
                 road.Controller.Update(Time.deltaTime);
             }
-
+            Roads.RemoveAll(IsAgentToRemove);
+        
             foreach (Army army in Armies)
             {
                 army.Controller.Update(Time.deltaTime);
             }
+            Armies.RemoveAll(IsAgentToRemove);
 
             foreach (Siege siege in Sieges)
             {
                 siege.Controller.Update(Time.deltaTime);
             }
+            Sieges.RemoveAll(IsAgentToRemove);
 
             foreach (Battle battle in Battles)
             {
                 battle.Controller.Update(Time.deltaTime);
             }
-        
+            Battles.RemoveAll(IsAgentToRemove);
         }
 
         void MoveArmy()
@@ -213,6 +226,7 @@ namespace LLtK
             }
         }
 
+        // FIXME: The victory should be triggered by what's causing it, not checked all the time
         public void CheckVictory()
         {
             King tempKing = null;
