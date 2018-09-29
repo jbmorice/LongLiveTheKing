@@ -7,3 +7,6 @@ RECURSIVE              = YES
 EXCLUDE_PATTERNS       = *.meta
 GENERATE_LATEX         = NO
 HAVE_DOT               = YES
+CLASS_GRAPH            = YES
+COLLABORATION_GRAPH    = YES
+UML_LOOK               = YES

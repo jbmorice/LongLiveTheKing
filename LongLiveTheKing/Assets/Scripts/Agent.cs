@@ -1,14 +1,17 @@
 ﻿using UnityEngine;
 
-public abstract class Agent : MonoBehaviour
+namespace LLtK
 {
-    public bool IsActive { get; set; }
-    public GameManager GameManager { get; protected set; }
-    public AgentController Controller { get; private set; }
-
-    protected Agent()
+    public abstract class Agent : MonoBehaviour
     {
-        Controller = new AgentController(this);
-    }
+        public bool IsActive { get; set; }
+        public GameManager GameManager { get; protected set; }
+        public AgentController Controller { get; private set; }
 
+        protected Agent()
+        {
+            Controller = new AgentController(this);
+        }
+
+    }
 }

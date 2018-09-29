@@ -1,6 +1,7 @@
-﻿using UnityEngine;
-
-public class MovingAgent : Agent
+﻿namespace LLtK
 {
+    public class MovingAgent : Agent
+    {
 
+    }
 }

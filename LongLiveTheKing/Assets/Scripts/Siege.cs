@@ -1,30 +1,30 @@
-﻿using UnityEngine;
-
-public class Siege : Agent
+﻿namespace LLtK
 {
-    public Village Village { get; set; }
-    public Army Army { get; set; }
-    public bool InProgress = true;
-
-    public void Init(GameManager gameManager, Army army, Village village)
+    public class Siege : Agent
     {
-        GameManager = gameManager;
-        Army = army;
-        Village = village;
-        GameManager.Sieges.Add(this);
-        ResolveSiege resolveSiege = new ResolveSiege();
-        resolveSiege.Start(this);
-        Controller.AddAgentBehaviour(resolveSiege);
-    }
+        public Village Village { get; set; }
+        public Army Army { get; set; }
+        public bool InProgress = true;
 
-    public void Remove()
-    {
-        GameManager.Sieges.Remove(this);
-        Destroy(gameObject);
-    }
+        public void Init(GameManager gameManager, Army army, Village village)
+        {
+            GameManager = gameManager;
+            Army = army;
+            Village = village;
+            GameManager.Sieges.Add(this);
+            ResolveSiege resolveSiege = new ResolveSiege();
+            resolveSiege.Start(this);
+            Controller.AddAgentBehaviour(resolveSiege);
+        }
 
-    void Update()
-    {
+        public void Remove()
+        {
+            GameManager.Sieges.Remove(this);
+            Destroy(gameObject);
+        }
+
+        void Update()
+        {
 /*        if (!InProgress)
         {
             GameManager.Armies.Remove(Army);
@@ -32,5 +32,6 @@ public class Siege : Agent
             Destroy(Army.gameObject);
             Destroy(gameObject);
         }*/
+        }
     }
 }

@@ -1,77 +1,77 @@
-﻿using UnityEngine;
-
-public abstract class AgentBehaviour
+﻿namespace LLtK
 {
-    public enum State
+    public abstract class AgentBehaviour
     {
-        Stopped,
-        Running,
-        Paused
-    }
-
-    protected AgentController _controller;
-    protected State _state;
-
-    public AgentController GetController()
-    {
-        return _controller;
-    }
-
-    public void SetController(AgentController controller)
-    {
-        _controller = controller;
-    }
-
-    public State Status
-    {
-        get
+        public enum State
         {
-            return _state;
+            Stopped,
+            Running,
+            Paused
         }
 
-    }
+        protected AgentController _controller;
+        protected State _state;
 
-    public bool Start()
-    {
-        if (_state == State.Stopped )
+        public AgentController GetController()
         {
-            _state = State.Running;
-            return true;
+            return _controller;
         }
-        return false;
-        
-    }
 
-    public bool Stop()
-    {
-        if (_state == State.Running || _state == State.Paused)
+        public void SetController(AgentController controller)
         {
-            _state = State.Stopped;
-            return true;
+            _controller = controller;
         }
-        return false;
-    }
 
-    public bool Pause()
-    {
-        if (_state == State.Running)
+        public State Status
         {
-            _state = State.Paused;
-            return true;
-        }
-        return false;
-    }
+            get
+            {
+                return _state;
+            }
 
-    public bool Resume()
-    {
-        if (_state == State.Paused)
+        }
+
+        public bool Start()
         {
-            _state = State.Running;
-            return true;
+            if (_state == State.Stopped )
+            {
+                _state = State.Running;
+                return true;
+            }
+            return false;
         }
-        return false;
+
+        public bool Stop()
+        {
+            if (_state == State.Running || _state == State.Paused)
+            {
+                _state = State.Stopped;
+                return true;
+            }
+            return false;
+        }
+
+        public bool Pause()
+        {
+            if (_state == State.Running)
+            {
+                _state = State.Paused;
+                return true;
+            }
+            return false;
+        }
+
+        public bool Resume()
+        {
+            if (_state == State.Paused)
+            {
+                _state = State.Running;
+                return true;
+            }
+            return false;
+        }
+
+        public abstract void Update(float dt);
+
     }
-
-    public abstract void Update(float dt);
-
 }
