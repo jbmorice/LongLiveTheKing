@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using LLtK.UI;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
@@ -7,10 +8,7 @@ namespace LLtK
 {
     public class GameManager : MonoBehaviour
     {
-        public bool GameInProgress = true;
-
-        public GameObject VictoryUI;
-        public GameObject DefeatUI;
+        public bool GameStopped = false;
 
         private bool _clickHoldArmy = false;
         private Village _sourceVillageArmy = null;
@@ -27,9 +25,14 @@ namespace LLtK
         public List<Army> Armies;
         public List<Battle> Battles;
         public List<Siege> Sieges;
-        public IA IA;
+        public SimpleAI SimpleAI;
 
-        public Kingdom Player;
+        public Kingdom PlayerKingdom;
+
+        public UIManager UiManager;
+
+        public event Action<Kingdom> OnGameWon;
+        public event Action<Kingdom> OnGameLost;
 
         private void Init()
         {
@@ -39,6 +42,7 @@ namespace LLtK
             {
                 Kingdom kingdom = (Kingdom)obj;
                 kingdom.Init(this);
+                kingdom.OnKingdomDestroyed += KingdomDestroyed;
             }
 
             Object[] villages = GameObject.FindObjectsOfType(typeof(Village));
@@ -65,8 +69,9 @@ namespace LLtK
                 road.Init(this, road.FirstVillage, road.SecondVillage);
             }
 
-            IA.Init(this);
-        
+            SimpleAI.Init(this);
+
+            UiManager.Init(this);
         }
 
         void Start()
@@ -143,7 +148,7 @@ namespace LLtK
                 if (Physics.Raycast(ray, out hit))
                 {
                     _sourceVillageArmy = hit.transform.gameObject.GetComponent<Village>();
-                    if (_sourceVillageArmy == null || !_sourceVillageArmy.Kingdom.Equals(Player) || _sourceVillageArmy.IsUnderSiege()) return;
+                    if (_sourceVillageArmy == null || !_sourceVillageArmy.Kingdom.Equals(PlayerKingdom) || _sourceVillageArmy.IsUnderSiege()) return;
                     _clickHoldArmy = true;
                 }
             }
@@ -180,7 +185,7 @@ namespace LLtK
 
                     _sourceVillageKing = king.StayingVillage;
 
-                    if (_sourceVillageKing == null || !_sourceVillageKing.Kingdom.Equals(Player)) return;
+                    if (_sourceVillageKing == null || !_sourceVillageKing.Kingdom.Equals(PlayerKingdom)) return;
                     _clickHoldKing = true;
                 }
             }
@@ -193,11 +198,11 @@ namespace LLtK
                 if (Physics.Raycast(ray, out hit))
                 {
                     _destinationVillageKing = hit.transform.gameObject.GetComponent<Village>();
-                    if (_destinationVillageKing == null || !_sourceVillageKing.Kingdom.Equals(Player) || _destinationVillageKing.Kingdom != Player) return;
+                    if (_destinationVillageKing == null || !_sourceVillageKing.Kingdom.Equals(PlayerKingdom) || _destinationVillageKing.Kingdom != PlayerKingdom) return;
                 }
 
                 King king = null;
-                foreach (Agent agent in Player.PossessedAgents)
+                foreach (Agent agent in PlayerKingdom.PossessedAgents)
                 {
                     if (agent.GetType() == typeof(King))
                     {
@@ -226,44 +231,35 @@ namespace LLtK
             }
         }
 
-        // FIXME: The victory should be triggered by what's causing it, not checked all the time
-        public void CheckVictory()
+        public void KingdomDestroyed(Kingdom kingdom)
         {
-            King tempKing = null;
-            foreach (King king in Kings)
+            if (kingdom == PlayerKingdom)
             {
-                if (king.Kingdom == Player) tempKing = king;
-            }
-
-            if (tempKing == null)
-            {
-                GameObject temp = Instantiate(DefeatUI, GameObject.Find("UICanvas").transform);
-                //temp.transform.SetParent(GameObject.Find("UICanvas").transform, true);
-                GameInProgress = false;
-                Debug.Log("Game Over");
-            }
-            else if (Kings.Count == 1)
-            {
-                GameObject temp = Instantiate(VictoryUI, GameObject.Find("UICanvas").transform);
-                //temp.transform.SetParent(GameObject.Find("UICanvas").transform, true);
-                GameInProgress = false;
-                Debug.Log("You win");
+                if (OnGameLost != null) OnGameLost(PlayerKingdom);
+                GameStopped = true;
             }
         }
 
-        void Update()
+        public bool IsGameInProgress()
         {
-            if (GameInProgress)
-            {
-                UpdateAgentBehaviours();
-                MoveArmy();
-                MoveKing();
-                UpdateKing();
-                CheckVictory();
-            }
-        
+            if (Kingdoms.Count > 1) return true;
+            if (OnGameWon != null) OnGameWon(Kingdoms[0]);
+            GameStopped = true;
+            return false;
         }
 
-
+        private void Update()
+        {
+            if (!GameStopped)
+            {
+                if (IsGameInProgress())
+                {
+                    UpdateAgentBehaviours();
+                    MoveArmy();
+                    MoveKing();
+                    UpdateKing();
+                }
+            }
+        }
     }
 }

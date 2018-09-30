@@ -46,6 +46,7 @@
                     _siege.Army.Remove();
                     _siege.Remove();
                 }
+
                 if (_siege.Army.Units > 0 && _siege.Village.Population <= 0)
                 {
                     _siege.Village.Population = _siege.Army.Units;

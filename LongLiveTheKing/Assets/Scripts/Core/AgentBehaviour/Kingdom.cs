@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace LLtK
@@ -12,6 +13,8 @@ namespace LLtK
         public GameObject ArmyPrefab;
         public GameObject KingPrefab;
         public bool IA;
+
+        public event Action<Kingdom> OnKingdomDestroyed;
 
         public void Init(GameManager gameManager)
         {
@@ -46,6 +49,12 @@ namespace LLtK
 
         public bool RemovePossessedAgent(Agent agent)
         {
+            if (PossessedAgents.Count - 1 == 0)
+            {
+                Remove();
+                if (OnKingdomDestroyed != null) OnKingdomDestroyed(this);
+            }
+
             return PossessedAgents.Remove(agent);
         }
     }

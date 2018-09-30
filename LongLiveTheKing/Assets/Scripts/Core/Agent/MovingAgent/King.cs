@@ -4,8 +4,8 @@ using UnityEngine;
 
 namespace LLtK
 {
-    public class King : MovingAgent {
-
+    public class King : MovingAgent
+    {
         public Kingdom Kingdom;
         public GameObject MovingGameObject;
         public GameObject StayingGameObject;
@@ -167,6 +167,8 @@ namespace LLtK
             {
                 StayingVillage.Controller.GetAgentBehaviour<KingBoost>().Stop();
             }
+
+            Kingdom.RemovePossessedAgent(this);
 
             if (CurrentGameObject != null) Destroy(CurrentGameObject);
             base.OnRemove();

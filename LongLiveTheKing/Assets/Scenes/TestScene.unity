@@ -140,9 +140,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74ae97ca34fcaa649939dbd92bd2b921, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GameInProgress: 1
-  VictoryUI: {fileID: 1075066036349160, guid: ff7b386e2e4f2604390a868b4ab9d60e, type: 2}
-  DefeatUI: {fileID: 1127470981236242, guid: 14ac9c0ebbdb11245a468f0a7d41ded6, type: 2}
+  GameStopped: 0
   Kingdoms: []
   Villages: []
   Kings: []
@@ -150,8 +148,9 @@ MonoBehaviour:
   Armies: []
   Battles: []
   Sieges: []
-  IA: {fileID: 1058992468}
-  Player: {fileID: 266425949}
+  SimpleAI: {fileID: 1058992468}
+  PlayerKingdom: {fileID: 266425949}
+  UiManager: {fileID: 1967903161}
 --- !u!4 &69795005
 Transform:
   m_ObjectHideFlags: 0
@@ -312,6 +311,11 @@ Prefab:
       value: 
       objectReference: {fileID: 1384975952009304, guid: 4cd4930eb46f3424e8231b88e21df564,
         type: 2}
+    - target: {fileID: 114324975414770784, guid: 4a553e0c31c888e4fa4f63b807b49903,
+        type: 2}
+      propertyPath: _kingdom
+      value: 
+      objectReference: {fileID: 715145117}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4a553e0c31c888e4fa4f63b807b49903, type: 2}
   m_IsPrefabAsset: 0
@@ -725,6 +729,16 @@ Prefab:
       propertyPath: MaxPopulation
       value: 200
       objectReference: {fileID: 0}
+    - target: {fileID: 114324975414770784, guid: 4a553e0c31c888e4fa4f63b807b49903,
+        type: 2}
+      propertyPath: _kingdom
+      value: 
+      objectReference: {fileID: 266425949}
+    - target: {fileID: 114324975414770784, guid: 4a553e0c31c888e4fa4f63b807b49903,
+        type: 2}
+      propertyPath: _maxPopulation
+      value: 100
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4a553e0c31c888e4fa4f63b807b49903, type: 2}
   m_IsPrefabAsset: 0
@@ -855,6 +869,11 @@ Prefab:
       propertyPath: MaxPopulation
       value: 50
       objectReference: {fileID: 0}
+    - target: {fileID: 114324975414770784, guid: 4a553e0c31c888e4fa4f63b807b49903,
+        type: 2}
+      propertyPath: _kingdom
+      value: 
+      objectReference: {fileID: 1085480792}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4a553e0c31c888e4fa4f63b807b49903, type: 2}
   m_IsPrefabAsset: 0
@@ -1054,6 +1073,7 @@ GameObject:
   - component: {fileID: 1967903159}
   - component: {fileID: 1967903158}
   - component: {fileID: 1967903157}
+  - component: {fileID: 1967903161}
   m_Layer: 0
   m_Name: UICanvas
   m_TagString: Untagged
@@ -1136,6 +1156,23 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1967903161
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1967903156}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f536e30741497304bbbb957719239f75, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  VillageUIPrefab: {fileID: 1384975952009304, guid: 4cd4930eb46f3424e8231b88e21df564,
+    type: 2}
+  VictoryUIPrefab: {fileID: 1075066036349160, guid: ff7b386e2e4f2604390a868b4ab9d60e,
+    type: 2}
+  DefeatUIPrefab: {fileID: 1127470981236242, guid: 14ac9c0ebbdb11245a468f0a7d41ded6,
+    type: 2}
 --- !u!114 &2008513376 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 114324975414770784, guid: 4a553e0c31c888e4fa4f63b807b49903,

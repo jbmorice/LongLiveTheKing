@@ -1,19 +1,65 @@
 ﻿using System;
 using System.Collections.Generic;
-using LLtK.UI;
 using UnityEngine;
 
 namespace LLtK
 {
     public class Village : Agent
     {
-        public Kingdom Kingdom;
-        public int Population = 10;
-        public int MaxPopulation = 100;
+        [SerializeField]
+        private Kingdom _kingdom;
+        public Kingdom Kingdom
+        {
+            get
+            {
+                return _kingdom;
+            }
+
+            set
+            {
+                _kingdom = value;
+                if (OnKingdomChange != null) OnKingdomChange(value);
+            }
+        }
+
+        [SerializeField]
+        private int _population = 10;
+        public int Population
+        {
+            get
+            {
+                return _population;
+            }
+
+            set
+            {
+                _population = value;
+                if (OnPopulationChange != null) OnPopulationChange(value);
+            }
+        }
+
+        [SerializeField]
+        private int _maxPopulation = 100;
+        public int MaxPopulation
+        {
+            get
+            {
+                return _maxPopulation;
+            }
+
+            set
+            {
+                _maxPopulation = value;
+                if (OnMaxPopulationChange != null) OnMaxPopulationChange(value);
+            }
+        }
+
         public bool IsPopulationIncreasing = true;
         public List<Road> NeighbouringRoads;
 
-        public GameObject VillageUIPrefab;
+        public event Action<int> OnPopulationChange;
+        public event Action<int> OnMaxPopulationChange;
+        public event Action<Kingdom> OnKingdomChange;
 
         public void Init(GameManager gameManager, Kingdom kingdom)
         {
@@ -24,10 +70,6 @@ namespace LLtK
             Kingdom.AddPossessedAgent(this);
             Debug.Log("I am a village belonging to " + Kingdom.Name + "!");
 
-            // Generate UI 
-            GameObject villageUI = Instantiate(VillageUIPrefab, gameObject.transform);
-            villageUI.GetComponent<VillageUI>().Init(this);
-
             // Add default behaviours
             PopulationProduction populationProduction = new PopulationProduction();
             populationProduction.Start(this); // #FIXME : Override AgentBehaviour.Start() instead of overload
@@ -37,6 +79,14 @@ namespace LLtK
             populationDiminution.Start(this);
             populationDiminution.Pause();
             Controller.AddAgentBehaviour(populationDiminution);
+        }
+
+        public void InitUI()
+        {
+            // Update UI
+            if (OnPopulationChange != null) OnPopulationChange(Population);
+            if (OnMaxPopulationChange != null) OnMaxPopulationChange(MaxPopulation);
+            if (OnKingdomChange != null) OnKingdomChange(Kingdom);
         }
 
         internal bool IsNeighbour(Village destinationVillage)
@@ -204,8 +254,6 @@ namespace LLtK
             return path;
         }
 
-
-
         public bool IsUnderSiege()
         {
             foreach (Siege siege in GameManager.Sieges)
@@ -229,15 +277,8 @@ namespace LLtK
             this.gameObject.transform.GetChild(0).GetComponent<MeshRenderer>().material.color = Kingdom.Material.color;
         }
 
-        void UpdateUI()
-        {
-
-
-        }
-
         void Update()
         {
-            UpdateUI();
             UpdateKingdom();
 
             if (Population == MaxPopulation)
@@ -283,60 +324,5 @@ namespace LLtK
                 IsPopulationIncreasing = true;
             }
         }
-/*
-    void Update()
-    {
-        UpdateUI();
-        UpdateKingdom();
-
-        if (Population == MaxPopulation)
-        {
-            if (IsPopulationIncreasing)
-            {
-                foreach (PopulationProduction populationProduction in Controller.GetAgentBehaviours<PopulationProduction>())
-                {
-                    populationProduction.Pause();
-                }
-                foreach (KingBoost kingBoost in Controller.GetAgentBehaviours<KingBoost>())
-                {
-                    kingBoost.Pause();
-                }
-                IsPopulationIncreasing = false;
-            }
-            else
-            {
-                Controller.GetAgentBehaviour<PopulationDiminution>().Pause();
-            }
-        }
-        else if (Population > MaxPopulation && IsPopulationIncreasing)
-        {
-            Controller.GetAgentBehaviour<PopulationDiminution>().Resume();
-
-            foreach (PopulationProduction populationProduction in Controller.GetAgentBehaviours<PopulationProduction>())
-            {
-                populationProduction.Pause();
-            }
-            foreach (KingBoost kingBoost in Controller.GetAgentBehaviours<KingBoost>())
-            {
-                kingBoost.Pause();
-            }
-            IsPopulationIncreasing = false;
-        }
-        else if (!IsPopulationIncreasing && Population < MaxPopulation && !IsUnderSiege())
-        {
-            Controller.GetAgentBehaviour<PopulationDiminution>().Pause();
-
-            foreach (PopulationProduction populationProduction in Controller.GetAgentBehaviours<PopulationProduction>())
-            {
-                populationProduction.Resume();
-            }
-            foreach (KingBoost kingBoost in Controller.GetAgentBehaviours<KingBoost>())
-            {
-                kingBoost.Resume();
-            }
-            IsPopulationIncreasing = true;
-        }
-    }*/
-
     }
 }

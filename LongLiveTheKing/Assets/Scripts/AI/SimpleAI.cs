@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace LLtK
 {
-    public class IA : MonoBehaviour
+    public class SimpleAI : MonoBehaviour
     {
         private float _elapsedTimeAttack = 0.0f;
         private float _periodAttack = 5.0f;
@@ -28,7 +28,7 @@ namespace LLtK
         // Update is called once per frame
         void Update()
         {
-            if(GameManager.GameInProgress)
+            if(!GameManager.GameStopped)
             {
                 foreach (Kingdom kingdom in GameManager.Kingdoms)
                 {
