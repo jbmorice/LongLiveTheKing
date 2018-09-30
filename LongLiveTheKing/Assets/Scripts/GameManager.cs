@@ -237,15 +237,15 @@ namespace LLtK
 
             if (tempKing == null)
             {
-                GameObject temp = Instantiate(DefeatUI, transform);
-                temp.transform.SetParent(GameObject.Find("UICanvas").transform, true);
+                GameObject temp = Instantiate(DefeatUI, GameObject.Find("UICanvas").transform);
+                //temp.transform.SetParent(GameObject.Find("UICanvas").transform, true);
                 GameInProgress = false;
                 Debug.Log("Game Over");
             }
             else if (Kings.Count == 1)
             {
-                GameObject temp = Instantiate(VictoryUI, transform);
-                temp.transform.SetParent(GameObject.Find("UICanvas").transform, true);
+                GameObject temp = Instantiate(VictoryUI, GameObject.Find("UICanvas").transform);
+                //temp.transform.SetParent(GameObject.Find("UICanvas").transform, true);
                 GameInProgress = false;
                 Debug.Log("You win");
             }

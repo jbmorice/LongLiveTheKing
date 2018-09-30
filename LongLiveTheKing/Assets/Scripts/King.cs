@@ -43,7 +43,7 @@ namespace LLtK
 
             gameObject.transform.position = village.transform.position;
             CurrentGameObject = Instantiate(StayingGameObject, gameObject.transform);
-            CurrentGameObject.transform.position = new Vector3(village.transform.position.x, village.transform.position.y + 20, village.transform.position.z);
+            CurrentGameObject.transform.position = new Vector3(village.transform.position.x, village.transform.position.y + 1.5f, village.transform.position.z);
 
             KingBoost kingBoost = new KingBoost();
             kingBoost.Start(village);

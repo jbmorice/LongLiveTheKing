@@ -17,7 +17,6 @@ namespace LLtK
 
         public void Remove()
         {
-            Assert.IsFalse(ToRemove);
             ToRemove = true;
         }
 
