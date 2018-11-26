@@ -10,8 +10,8 @@ namespace LLtK.UI
 
         public void Init(GameManager gameManager)
         {
-            gameManager.OnGameLost += GameLost;
-            gameManager.OnGameWon += GameWon;
+            gameManager.GameLostEvent += OnGameLostEvent;
+            gameManager.GameWonEvent += OnGameWonEvent;
 
             foreach (Village village in gameManager.Villages)
             {
@@ -20,12 +20,12 @@ namespace LLtK.UI
             }
         }
 
-        private void GameLost(Kingdom kingdom)
+        private void OnGameLostEvent(Kingdom kingdom)
         {
             Instantiate(DefeatUIPrefab, transform);
         }
 
-        private void GameWon(Kingdom kingdom)
+        private void OnGameWonEvent(Kingdom kingdom)
         {
             Instantiate(VictoryUIPrefab, transform);
         }

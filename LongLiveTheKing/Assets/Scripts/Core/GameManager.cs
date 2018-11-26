@@ -31,8 +31,8 @@ namespace LLtK
 
         public UIManager UiManager;
 
-        public event Action<Kingdom> OnGameWon;
-        public event Action<Kingdom> OnGameLost;
+        public event Action<Kingdom> GameWonEvent;
+        public event Action<Kingdom> GameLostEvent;
 
         private void Init()
         {
@@ -42,7 +42,7 @@ namespace LLtK
             {
                 Kingdom kingdom = (Kingdom)obj;
                 kingdom.Init(this);
-                kingdom.OnKingdomDestroyed += KingdomDestroyed;
+                kingdom.KingdomDestroyedEvent += OnKingdomDestroyedEvent;
             }
 
             Object[] villages = GameObject.FindObjectsOfType(typeof(Village));
@@ -231,11 +231,11 @@ namespace LLtK
             }
         }
 
-        public void KingdomDestroyed(Kingdom kingdom)
+        public void OnKingdomDestroyedEvent(Kingdom kingdom)
         {
             if (kingdom == PlayerKingdom)
             {
-                if (OnGameLost != null) OnGameLost(PlayerKingdom);
+                if (GameLostEvent != null) GameLostEvent(PlayerKingdom);
                 GameStopped = true;
             }
         }
@@ -243,7 +243,7 @@ namespace LLtK
         public bool IsGameInProgress()
         {
             if (Kingdoms.Count > 1) return true;
-            if (OnGameWon != null) OnGameWon(Kingdoms[0]);
+            if (GameWonEvent != null) GameWonEvent(Kingdoms[0]);
             GameStopped = true;
             return false;
         }

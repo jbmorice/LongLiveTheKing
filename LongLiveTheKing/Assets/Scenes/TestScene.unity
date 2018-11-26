@@ -330,6 +330,7 @@ GameObject:
   - component: {fileID: 553354878}
   - component: {fileID: 553354877}
   - component: {fileID: 553354880}
+  - component: {fileID: 553354881}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -390,28 +391,50 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 553354876}
-  m_LocalRotation: {x: -0.50924796, y: 0.0012944448, z: -0.00076950213, w: -0.86061853}
-  m_LocalPosition: {x: 0.30951676, y: 14.365363, z: -7.9657326}
+  m_LocalRotation: {x: 0.5, y: 0, z: 0, w: 0.8660254}
+  m_LocalPosition: {x: 0, y: 10, z: -5.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 60, y: 0, z: 0}
 --- !u!114 &553354880
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 553354876}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1457f2bda96496c42817a51383fee7c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PanSpeed: 20
-  PanBorderThickness: 10
-  PanLimit: {x: 0, y: 0, z: 0}
-  ScrollSpeed: 20
+  FollowTargetTransform: {fileID: 0}
+  FollowDistance: 5
+  MovementSpeed: 10
+  MinZoomDistance: 2
+  MaxZoomDistance: 15
+  ZoomSpeed: 15
+  LimitPosition: 1
+  LimitX: 5
+  LimitZ: 5
+--- !u!114 &553354881
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 553354876}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e65d44ddb6945fd9b992572caa08b0b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CurrentInputMode: 0
+  MoveCameraUpKeyCode: 273
+  MoveCameraDownKeyCode: 274
+  MoveCameraLeftKeyCode: 276
+  MoveCameraRightKeyCode: 275
+  ScreenEdgeSize: 25
 --- !u!114 &581965248 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 114324975414770784, guid: 4a553e0c31c888e4fa4f63b807b49903,

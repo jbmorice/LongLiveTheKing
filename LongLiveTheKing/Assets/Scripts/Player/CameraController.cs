@@ -1,48 +1,90 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace LLtK
 {
+    [RequireComponent(typeof(InputHandler))]
     public class CameraController : MonoBehaviour
     {
+        private InputHandler _inputHandler;
 
-        public float PanSpeed = 20f;
-        public float PanBorderThickness = 10f;
-        public Vector3 PanLimit;
+        public Transform FollowTargetTransform;
+        public float FollowDistance = 5f;
+        public float MovementSpeed = 10f;
+        public float MinZoomDistance = 2f;
+        public float MaxZoomDistance = 15f;
+        public float ZoomSpeed = 15f;
+        public bool LimitPosition = false;
+        public float LimitX = 5f;
+        public float LimitZ = 5f;
 
-        public float ScrollSpeed = 20f;
-
-        private Vector3 TargetPosition = Vector3.zero;
-
-        void Update ()
+        public bool IsFollowingTarget
         {
-            Vector3 pos = transform.position;
-            if (Input.GetKey("z") || Input.GetKey(KeyCode.UpArrow) || Input.mousePosition.y >= Screen.height - PanBorderThickness)
-            {
-                pos.z += PanSpeed * Time.deltaTime;
-            }
-            if (Input.GetKey("s") || Input.GetKey(KeyCode.DownArrow) || Input.mousePosition.y <= PanBorderThickness)
-            {
-                pos.z -= PanSpeed * Time.deltaTime;
-            }
-            if (Input.GetKey("d") || Input.GetKey(KeyCode.RightArrow) || Input.mousePosition.x >= Screen.width - PanBorderThickness)
-            {
-                pos.x += PanSpeed * Time.deltaTime;
-            }
-            if (Input.GetKey("q") || Input.GetKey(KeyCode.LeftArrow) || Input.mousePosition.x <= PanBorderThickness)
-            {
-                pos.x -= PanSpeed * Time.deltaTime;
-            }
+            get { return FollowTargetTransform != null; }
+        }
 
-            float scrool = Input.GetAxis("Mouse ScrollWheel");
-            pos.y -= ScrollSpeed * scrool * 1000f *  Time.deltaTime;
+        private void Start()
+        {
+            _inputHandler = GetComponent<InputHandler>();
+            _inputHandler.MoveCameraEvent += OnMoveCameraEvent;
+            _inputHandler.ZoomEvent += OnZoomEvent;
+        }
 
-            pos.x = Mathf.Clamp(pos.x, -PanLimit.x, PanLimit.x);
-            pos.z = Mathf.Clamp(pos.z, -PanLimit.z, PanLimit.z);
-            pos.y = Mathf.Clamp(pos.y, 130, PanLimit.y);
+        private void Update()
+        {
+            if (IsFollowingTarget)
+            {
+                FollowTarget();
+            }
+        }
 
-            TargetPosition = pos;
+        private void OnMoveCameraEvent(Vector3 direction)
+        {
+            if (IsFollowingTarget) return;
 
-            transform.position = Vector3.Lerp(transform.position, TargetPosition, 2.0f * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, transform.position + direction, MovementSpeed * Time.deltaTime);
+
+            LimitMovement();
+        }
+
+        private void OnZoomEvent(float zoomValue)
+        {
+            Vector3 zoomTargetPosition =  transform.position + zoomValue * transform.forward;
+
+            float distance = GetDistanceFromDecor(zoomTargetPosition);
+            if (distance <= MinZoomDistance || distance >= MaxZoomDistance) return;
+
+            transform.position = Vector3.Lerp(transform.position, zoomTargetPosition, Time.deltaTime * ZoomSpeed);
+        }
+
+        private void FollowTarget()
+        {
+            Vector3 followTargetPosition =  FollowTargetTransform.transform.position - transform.forward * FollowDistance;
+            transform.position = Vector3.MoveTowards(transform.position, followTargetPosition, Time.deltaTime * MovementSpeed);
+
+            LimitMovement();
+        }
+
+        private void LimitMovement()
+        {
+            if (!LimitPosition) return;
+            transform.position = new Vector3(Mathf.Clamp(transform.position.x, -LimitX, LimitX), transform.position.y, Mathf.Clamp(transform.position.z, -LimitZ, LimitZ));
+        }
+
+        private float GetDistanceFromDecor(Vector3 position)
+        {
+            Ray ray = new Ray(position, transform.forward);
+            Debug.DrawRay(position, transform.forward);
+            RaycastHit hit;
+
+            if (Physics.Raycast(ray, out hit, 100f)) // TODO: Layer check instead of distance
+            {
+                return hit.distance;
+            }
+            else
+            {
+                return 0f;
+            }
         }
     }
 }

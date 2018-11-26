@@ -18,7 +18,7 @@ namespace LLtK
             set
             {
                 _kingdom = value;
-                if (OnKingdomChange != null) OnKingdomChange(value);
+                if (KingdomChangeEvent != null) KingdomChangeEvent(value);
             }
         }
 
@@ -34,7 +34,7 @@ namespace LLtK
             set
             {
                 _population = value;
-                if (OnPopulationChange != null) OnPopulationChange(value);
+                if (PopulationChangeEvent != null) PopulationChangeEvent(value);
             }
         }
 
@@ -50,16 +50,16 @@ namespace LLtK
             set
             {
                 _maxPopulation = value;
-                if (OnMaxPopulationChange != null) OnMaxPopulationChange(value);
+                if (MaxPopulationChangeEvent != null) MaxPopulationChangeEvent(value);
             }
         }
 
         public bool IsPopulationIncreasing = true;
         public List<Road> NeighbouringRoads;
 
-        public event Action<int> OnPopulationChange;
-        public event Action<int> OnMaxPopulationChange;
-        public event Action<Kingdom> OnKingdomChange;
+        public event Action<int> PopulationChangeEvent;
+        public event Action<int> MaxPopulationChangeEvent;
+        public event Action<Kingdom> KingdomChangeEvent;
 
         public void Init(GameManager gameManager, Kingdom kingdom)
         {
@@ -84,9 +84,9 @@ namespace LLtK
         public void InitUI()
         {
             // Update UI
-            if (OnPopulationChange != null) OnPopulationChange(Population);
-            if (OnMaxPopulationChange != null) OnMaxPopulationChange(MaxPopulation);
-            if (OnKingdomChange != null) OnKingdomChange(Kingdom);
+            if (PopulationChangeEvent != null) PopulationChangeEvent(Population);
+            if (MaxPopulationChangeEvent != null) MaxPopulationChangeEvent(MaxPopulation);
+            if (KingdomChangeEvent != null) KingdomChangeEvent(Kingdom);
         }
 
         internal bool IsNeighbour(Village destinationVillage)

@@ -18,9 +18,9 @@ namespace LLtK.UI
             Village = village;
             name = Village.name;
 
-            village.OnPopulationChange += UpdatePopulation;
-            village.OnMaxPopulationChange += UpdateMaxPopulation;
-            village.OnKingdomChange += UpdateKingdom;
+            village.PopulationChangeEvent += OnUpdatePopulation;
+            village.MaxPopulationChangeEvent += OnUpdateMaxPopulation;
+            village.KingdomChangeEvent += OnUpdateKingdom;
 
             village.InitUI();
         }
@@ -38,17 +38,17 @@ namespace LLtK.UI
             transform.position = screenPosition;
         }
 
-        private void UpdatePopulation(int population)
+        private void OnUpdatePopulation(int population)
         {
             PopulationText.text = population.ToString();
         }
 
-        private void UpdateMaxPopulation(int maxPopulation)
+        private void OnUpdateMaxPopulation(int maxPopulation)
         {
             MaxPopulationText.text = maxPopulation.ToString();
         }
 
-        private void UpdateKingdom(Kingdom kingdom)
+        private void OnUpdateKingdom(Kingdom kingdom)
         {
             BackgroundImage.color = kingdom.Material.color;
         }

@@ -14,7 +14,7 @@ namespace LLtK
         public GameObject KingPrefab;
         public bool IA;
 
-        public event Action<Kingdom> OnKingdomDestroyed;
+        public event Action<Kingdom> KingdomDestroyedEvent;
 
         public void Init(GameManager gameManager)
         {
@@ -52,7 +52,7 @@ namespace LLtK
             if (PossessedAgents.Count - 1 == 0)
             {
                 Remove();
-                if (OnKingdomDestroyed != null) OnKingdomDestroyed(this);
+                if (KingdomDestroyedEvent != null) KingdomDestroyedEvent(this);
             }
 
             return PossessedAgents.Remove(agent);
